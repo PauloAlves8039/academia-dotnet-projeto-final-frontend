@@ -1,27 +1,28 @@
-# EstacionamentoMotos
+<h1 align="center">Academia .NET - Estacionamento de Motos - Frontend</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+<p align="center">
+  <a href="https://angular.io/"><img alt="Angular" src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white" /></a>
+</p>
 
-## Development server
+## :computer: Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Esse projeto faz a simulação de um sistema de gerenciamento para um estacionamento de motos, se trata do desafio final da Academia DotNet ministrada pela `Universidade Franciscana - UFN`.
 
-## Code scaffolding
+Este repositório esta relacionando ao [Projeto Final Backend](https://github.com/PauloAlves8039/academia-dotnet-projeto-final-backend)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✔️ Recursos Utilizados
 
-## Build
+- ``Node.js v18.18.1``
+- ``NPM v10.2.0``
+- ``Angular CLI v17.0.7``
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## :floppy_disk: Clonar Repositório
 
-## Running unit tests
+```bash
+git clone https://github.com/PauloAlves8039/academia-dotnet-projeto-final-frontend.git
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## :boy: Author
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<a href="https://github.com/PauloAlves8039"><img src="https://avatars.githubusercontent.com/u/57012714?v=4" width=70></a>
+[Paulo Alves](https://github.com/PauloAlves8039)
