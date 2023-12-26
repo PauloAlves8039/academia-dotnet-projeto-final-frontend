@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RealBrasileiroPipe } from './shared/pipes/moedas/RealBrasileiro.pipe';
+import { ListEnderecosComponent } from './components/endereco/list-enderecos/list-enderecos.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RealBrasileiroPipe } from './shared/pipes/moedas/RealBrasileiro.pipe';
     NavbarComponent,
     FooterComponent,
     RealBrasileiroPipe,
+    ListEnderecosComponent,
 
   ],
   imports: [

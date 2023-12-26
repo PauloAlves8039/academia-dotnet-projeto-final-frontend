@@ -1,0 +1,41 @@
+
+<div>
+  <h2 class="page-title">Endereços</h2>
+</div>
+
+<div class="cliente-table">
+  <table class="table table-bordered table-hover text-table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Logradouro</th>
+        <th scope="col">Número</th>
+        <th scope="col">Complemento</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Estado</th>
+        <th scope="col">CEP</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let endereco of enderecos">
+        <td>{{ endereco.logradouro }}</td>
+        <td>{{ endereco.numero }}</td>
+        <td>{{ endereco.complemento }}</td>
+        <td>{{ endereco.bairro }}</td>
+        <td>{{ endereco.cidade }}</td>
+        <td>{{ endereco.estado }}</td>
+        <td>{{ endereco.cep }}</td>
+        <td>
+          <button type="button" class="btn btn-warning btn-sm me-1" title="Editar">
+            <i class="bi bi-pencil-square">Editar</i>
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" title="Excluir">
+            <i class="bi bi-trash-fill">Excluir</i>
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
