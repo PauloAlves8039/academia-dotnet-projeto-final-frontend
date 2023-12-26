@@ -1,2 +1,15 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root{
+  --primary-color: #00BFFF;
+  --success-color: #00CD00;
+  --danger-color: #FF4500;
+  --neutral-color: #FFFFFF;
+  --neutral-color2: #9C9C9C;
+}
+
+.page-title {
+  text-align: center;
+  color: var(--primary-color);
+}
