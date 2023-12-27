@@ -1,10 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+
 :root{
   --primary-color: #00BFFF;
+  --info-color: #1E90FF;
   --success-color: #00CD00;
   --danger-color: #FF4500;
+  --warning-color: #FFB90F;
   --neutral-color: #FFFFFF;
   --neutral-color2: #9C9C9C;
 }
@@ -12,4 +15,96 @@
 .page-title {
   text-align: center;
   color: var(--primary-color);
+}
+
+.main {
+  margin-bottom: 60px;
+}
+
+.content-form {
+  display: flex;
+  justify-content: center;
+}
+
+.input-form-sm {
+  width: 100px;
+}
+
+.input-form-md {
+  width: 200px;
+}
+
+.input-form-lg {
+  width: 300px;
+}
+
+.container-body {
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.form-content {
+  margin-top: 15px;
+}
+
+.button-form {
+  width: 170px;
+  border: 1px solid var(--neutral-color2);
+  border-radius: 4px;
+}
+
+.button-border {
+  border: 1px solid var(--neutral-color2);
+  border-radius: 4px;
+}
+
+.button-success {
+  background-color: var(--neutral-color);
+  color: var(--success-color);
+}
+
+.button-success:hover {
+  background-color: var(--success-color);
+  color: var(--neutral-color);
+}
+
+.button-info {
+  background-color: var(--neutral-color);
+  color: var(--info-color);
+}
+
+.button-info:hover {
+  background-color: var(--info-color);
+  color: var(--neutral-color);
+}
+
+.button-warning {
+  background-color: var(--neutral-color);
+  color: var(--warning-color);
+}
+
+.button-warning:hover {
+  background-color: var(--warning-color);
+  color: var(--neutral-color);
+}
+
+.button-danger {
+  background-color: var(--neutral-color);
+  color: var(--danger-color);
+}
+
+.button-danger:hover {
+  background-color: var(--danger-color);
+  color: var(--neutral-color);
+}
+
+.button-cancel {
+  background-color: var(--neutral-color);
+  color: var(--neutral-color2);
+}
+
+.button-cancel:hover {
+  background-color: var(--neutral-color2);
+  color: var(--neutral-color);
 }

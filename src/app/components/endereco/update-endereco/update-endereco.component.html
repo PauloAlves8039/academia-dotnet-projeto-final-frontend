@@ -1,0 +1,129 @@
+<div class="container container-body">
+
+  <h2 class="page-title">Atualizar Endereço</h2>
+
+  <div class="row mb-3 form-content">
+    <div class="col-md-2 d-flex align-items-end">
+      <label for="cep-buscado" class="form-label me-2">CEP</label>
+      <input type="text"
+             class="form-control"
+             id="cep-buscado"
+             name="cep-buscado"
+             [(ngModel)]="novoCep"
+             maxlength="8"
+             pattern="[0-9]{8}"
+             required>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-end">
+      <button type="button" class="btn button-info button-form" (click)="atualizarPesquisarCep()" title="Pesquisar CEP">
+        <i class="bi bi-search"></i> Pesquisar CEP
+      </button>
+
+      <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposEndereco()" title="Cancelar Pesquisa">
+        <i class="bi bi-x-square"></i> Cancelar
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <form (ngSubmit)="atualizarEndereco()" #enderecoForm="ngForm">
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="logradouro" class="form-label">Logradouro</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="logradouro"
+                 name="logradouro"
+                 [(ngModel)]="enderecoExistente.logradouro"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="numero" class="form-label">Número</label>
+          <input type="text"
+                 class="form-control input-form-sm"
+                 id="numero"
+                 name="numero"
+                 [(ngModel)]="enderecoExistente.numero"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="complemento" class="form-label">Complemento</label>
+          <input type="text"
+                 class="form-control"
+                 id="complemento"
+                 name="complemento"
+                 [(ngModel)]="enderecoExistente.complemento">
+        </div>
+
+        <div class="mb-2">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="bairro"
+                 name="bairro"
+                 [(ngModel)]="enderecoExistente.bairro"
+                 required>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="cidade"
+                 name="cidade"
+                 [(ngModel)]="enderecoExistente.cidade"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="estado" class="form-label">Estado</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="estado"
+                 name="estado"
+                 [(ngModel)]="enderecoExistente.estado"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="cep" class="form-label">CEP Encontrado:</label>
+          <input type="text"
+                 class="form-control input-form-md"
+                 id="cep"
+                 name="cep"
+                 [(ngModel)]="enderecoExistente.cep"
+                 required>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="mt-2">
+      <button type="submit" class="btn button-success button-form" title="Salvar">
+        <i class="bi bi-floppy"></i> Salvar
+      </button>
+      <button type="button" class="btn button-cancel button-form ms-2" title="Cancelar"
+        (click)="limparCamposEndereco()">
+        <i class="bi bi-x-square"></i> Cancelar
+      </button>
+      <button type="button" class="btn button-info button-form ms-2" (click)="voltarParaListaEnderecos()" title="Lista de Endereços">
+        <i class="bi bi-arrow-left-square"></i> Voltar
+      </button>
+    </div>
+
+  </form>
+
+</div>

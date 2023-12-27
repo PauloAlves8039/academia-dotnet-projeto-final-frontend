@@ -1,9 +1,12 @@
-
 <div>
   <h2 class="page-title">Endereços</h2>
 </div>
 
-<div class="cliente-table">
+<button class="btn button-success button-border" (click)="abrirCadstroDeEndereco()">
+  <i class="bi bi-file-plus"></i> Cadastrar
+</button>
+
+<div class="cliente-table mt-2">
   <table class="table table-bordered table-hover text-table">
     <thead class="table-dark">
       <tr>
@@ -27,10 +30,10 @@
         <td>{{ endereco.estado }}</td>
         <td>{{ endereco.cep }}</td>
         <td>
-          <button type="button" class="btn btn-warning btn-sm me-1" title="Editar">
+          <button type="button" class="btn button-warning button-border btn-sm btn-sm me-1" title="Editar" (click)="editarEndereco(endereco.codigoEndereco)">
             <i class="bi bi-pencil-square">Editar</i>
           </button>
-          <button type="button" class="btn btn-danger btn-sm" title="Excluir">
+          <button type="button" class="btn button-danger button-border btn-sm" title="Excluir" (click)="excluirEndereco(endereco.codigoEndereco)">
             <i class="bi bi-trash-fill">Excluir</i>
           </button>
 

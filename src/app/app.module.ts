@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RealBrasileiroPipe } from './shared/pipes/moedas/RealBrasileiro.pipe';
 import { ListEnderecosComponent } from './components/endereco/list-enderecos/list-enderecos.component';
+import { CreateEnderecoComponent } from './components/endereco/create-endereco/create-endereco.component';
+import { UpdateEnderecoComponent } from './components/endereco/update-endereco/update-endereco.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ListEnderecosComponent } from './components/endereco/list-enderecos/lis
     FooterComponent,
     RealBrasileiroPipe,
     ListEnderecosComponent,
+    CreateEnderecoComponent,
+    UpdateEnderecoComponent,
 
   ],
   imports: [
