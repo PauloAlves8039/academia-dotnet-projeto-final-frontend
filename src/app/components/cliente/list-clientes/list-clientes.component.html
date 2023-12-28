@@ -28,10 +28,16 @@
         <td>{{ cliente.email }}</td>
         <td>{{ cliente.endereco?.logradouro }}, {{ cliente.endereco?.cidade }}, {{ cliente.endereco?.numero }}</td>
         <td>
-          <button type="button" class="btn button-warning button-border btn-sm btn-sm me-1" (click)="editarCliente(cliente.codigoCliente)" title="Editar">
+          <button type="button"
+                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  (click)="editarCliente(cliente.codigoCliente)"
+                  title="Editar">
             <i class="bi bi-pencil-square">Editar</i>
           </button>
-          <button type="button" class="btn button-danger button-border btn-sm" (click)="excluirCliente(cliente.codigoCliente)" title="Excluir">
+          <button type="button"
+                  class="btn button-danger button-border btn-sm"
+                  (click)="excluirCliente(cliente.codigoCliente)"
+                  title="Excluir">
             <i class="bi bi-trash-fill">Excluir</i>
           </button>
         </td>

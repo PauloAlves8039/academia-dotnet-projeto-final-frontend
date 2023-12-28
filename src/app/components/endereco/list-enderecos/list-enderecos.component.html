@@ -30,10 +30,16 @@
         <td>{{ endereco.estado }}</td>
         <td>{{ endereco.cep }}</td>
         <td>
-          <button type="button" class="btn button-warning button-border btn-sm btn-sm me-1" title="Editar" (click)="editarEndereco(endereco.codigoEndereco)">
+          <button type="button"
+                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  (click)="editarEndereco(endereco.codigoEndereco)"
+                  title="Editar">
             <i class="bi bi-pencil-square">Editar</i>
           </button>
-          <button type="button" class="btn button-danger button-border btn-sm" title="Excluir" (click)="excluirEndereco(endereco.codigoEndereco)">
+          <button type="button"
+                  class="btn button-danger button-border btn-sm"
+                  (click)="excluirEndereco(endereco.codigoEndereco)"
+                  title="Excluir">
             <i class="bi bi-trash-fill">Excluir</i>
           </button>
 

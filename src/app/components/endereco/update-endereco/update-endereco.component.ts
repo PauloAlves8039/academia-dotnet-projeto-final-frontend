@@ -22,11 +22,11 @@ export class UpdateEnderecoComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.carregarEnderecoDaRota();
+    this.carregarEnderecoPelaRota();
   }
 
-  async carregarEnderecoDaRota() {
-    const codigoEndereco = this.obterCodigoEnderecoDaRota();
+  async carregarEnderecoPelaRota() {
+    const codigoEndereco = this.obterCodigoEnderecoPelaRota();
 
     if (codigoEndereco) {
       this.enderecoExistente = await this.enderecoService.getEnderecoPorCodigo(codigoEndereco);
@@ -40,7 +40,7 @@ export class UpdateEnderecoComponent implements OnInit {
       if (this.validarCamposObrigatorios()) {
         await this.atualizarPesquisarCep();
         const resposta = await this.enderecoService.updateEndereco(this.enderecoExistente);
-        alert('Endereço atualiza com sucesso: ' + resposta);
+        alert('Endereço atualizado com sucesso: ' + resposta);
         this.limparCamposEndereco();
       } else {
         alert('Preencha todos os campos obrigatórios.');
@@ -102,7 +102,7 @@ export class UpdateEnderecoComponent implements OnInit {
     this.novoCep = '';
   }
 
-  private obterCodigoEnderecoDaRota(): number | null {
+  private obterCodigoEnderecoPelaRota(): number | null {
     const codigoEndereco = this.route.snapshot.paramMap.get('codigoEndereco');
     return codigoEndereco ? +codigoEndereco : null;
   }
