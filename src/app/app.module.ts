@@ -14,6 +14,9 @@ import { RealBrasileiroPipe } from './shared/pipes/moedas/RealBrasileiro.pipe';
 import { ListEnderecosComponent } from './components/endereco/list-enderecos/list-enderecos.component';
 import { CreateEnderecoComponent } from './components/endereco/create-endereco/create-endereco.component';
 import { UpdateEnderecoComponent } from './components/endereco/update-endereco/update-endereco.component';
+import { ListClientesComponent } from './components/cliente/list-clientes/list-clientes.component';
+import { CreateClienteComponent } from './components/cliente/create-cliente/create-cliente.component';
+import { UpdateClienteComponent } from './components/cliente/update-cliente/update-cliente.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { UpdateEnderecoComponent } from './components/endereco/update-endereco/u
     ListEnderecosComponent,
     CreateEnderecoComponent,
     UpdateEnderecoComponent,
+    ListClientesComponent,
+    CreateClienteComponent,
+    UpdateClienteComponent,
 
   ],
   imports: [

@@ -1,0 +1,98 @@
+<div class="container container-body">
+
+  <h2 class="page-title">Atualizar Cliente</h2>
+
+  <hr>
+
+  <form (ngSubmit)="atualizarCliente()" #enderecoForm="ngForm">
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="nome"
+                 name="nome"
+                 [(ngModel)]="clienteExistente.nome"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+          <input type="date"
+                 class="form-control input-form-md"
+                 id="dataNascimento"
+                 name="dataNascimento"
+                 [(ngModel)]="clienteExistente.dataNascimento"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text"
+                 class="form-control"
+                 id="cpf"
+                 name="cpf"
+                 [(ngModel)]="clienteExistente.cpf"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="telefone"
+                 name="telefone"
+                 [(ngModel)]="clienteExistente.telefone"
+                 required>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="email" class="form-label">Email</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="email"
+                 name="email"
+                 [(ngModel)]="clienteExistente.email"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="endereco" class="form-label">Endereco</label>
+          <select class="form-control input-form-lg"
+                  id="endereco"
+                  name="endereco"
+                  [(ngModel)]="clienteExistente.codigoEndereco"
+                  required>
+            <option *ngFor="let endereco of enderecos" [value]="endereco.codigoEndereco">
+              {{ endereco.logradouro }}, {{ endereco.cidade }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="mt-2">
+      <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
+        <i class="bi bi-floppy"></i> Salvar
+      </button>
+      <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposCliente()" title="Cancelar">
+        <i class="bi bi-x-square"></i> Cancelar
+      </button>
+      <button type="button" class="btn button-info button-form ms-2" (click)="voltarParaListaClientes()" title="Lista de Clientes">
+        <i class="bi bi-arrow-left-square"></i> Voltar
+      </button>
+    </div>
+
+  </form>
+
+</div>
