@@ -105,8 +105,8 @@ export class UpdateClienteComponent implements OnInit {
   }
 
   private obterCodigoClienteDaRota(): number | null {
-    const codigoEndereco = this.route.snapshot.paramMap.get('codigoEndereco');
-    return codigoEndereco ? +codigoEndereco : null;
+    const codigoCliente = this.route.snapshot.paramMap.get('codigoCliente');
+    return codigoCliente ? +codigoCliente : null;
   }
 
 }
