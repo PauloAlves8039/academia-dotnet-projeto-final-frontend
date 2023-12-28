@@ -1,0 +1,61 @@
+<div class="container container-body">
+
+  <h2 class="page-title">Atualizar Associação Cliente e Veículo</h2>
+
+  <hr>
+
+  <form (ngSubmit)="atualizarClienteVeiculo()" #enderecoForm="ngForm">
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="cliente" class="form-label">Cliente</label>
+          <select class="form-control input-form-lg"
+                  id="cliente"
+                  name="cliente"
+                  [(ngModel)]="clienteVeiculoExistente.clienteId"
+                  required>
+            <option *ngFor="let cliente of clientesExistentes" [value]="cliente.codigoCliente">
+              {{ cliente.nome }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="veiculo" class="form-label">Veículo</label>
+          <select class="form-control input-form-lg"
+                  id="veiculo"
+                  name="veiculo"
+                  [(ngModel)]="clienteVeiculoExistente.veiculoId"
+                  required>
+            <option *ngFor="let veiculo of veiculosExistentes" [value]="veiculo.codigoVeiculo">
+              {{ veiculo.marca }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="mt-2">
+      <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
+        <i class="bi bi-floppy"></i> Salvar
+      </button>
+      <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposClienteVeiculo()" title="Cancelar">
+        <i class="bi bi-x-square"></i> Cancelar
+      </button>
+      <button type="button" class="btn button-info button-form ms-2" (click)="voltarParaListaClientesVeiculos()" title="Lista de Clientes e Veículos">
+        <i class="bi bi-arrow-left-square"></i> Voltar
+      </button>
+    </div>
+
+  </form>
+
+</div>

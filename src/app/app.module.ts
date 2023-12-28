@@ -20,6 +20,9 @@ import { UpdateClienteComponent } from './components/cliente/update-cliente/upda
 import { ListVeiculosComponent } from './components/veiculo/list-veiculos/list-veiculos.component';
 import { CreateVeiculoComponent } from './components/veiculo/create-veiculo/create-veiculo.component';
 import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/update-veiculo.component';
+import { ListClienteVeiculoComponent } from './components/clienteVeiculo/list-cliente-veiculo/list-cliente-veiculo.component';
+import { CreateClienteVeiculoComponent } from './components/clienteVeiculo/create-cliente-veiculo/create-cliente-veiculo.component';
+import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/update-cliente-veiculo/update-cliente-veiculo.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/upda
     ListVeiculosComponent,
     CreateVeiculoComponent,
     UpdateVeiculoComponent,
+    ListClienteVeiculoComponent,
+    CreateClienteVeiculoComponent,
+    UpdateClienteVeiculoComponent,
 
   ],
   imports: [

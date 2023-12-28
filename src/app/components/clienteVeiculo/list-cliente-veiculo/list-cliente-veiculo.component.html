@@ -1,0 +1,39 @@
+<div>
+  <h2 class="page-title">Clientes e Veículos Associados</h2>
+</div>
+
+<button class="btn button-success button-border" (click)="abrirCadastroDeClienteVeiculo()">
+  <i class="bi bi-file-plus"></i> Cadastrar
+</button>
+
+<div class="mt-2">
+  <table class="table table-bordered table-hover text-table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Veículo</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let clienteVeiculo of clientesVeiculos">
+        <td>{{ encontrarNomeDoCliente(clienteVeiculo.clienteId) }}</td>
+        <td>{{ encontrarMarcaDoVeiculo(clienteVeiculo.veiculoId) }}</td>
+        <td>
+          <button type="button"
+                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  (click)="editarClienteVeiculo(clienteVeiculo.codigoClienteVeiculo)"
+                  title="Editar">
+            <i class="bi bi-pencil-square">Editar</i>
+          </button>
+          <button type="button"
+                  class="btn button-danger button-border btn-sm"
+                  title="Excluir">
+            <i class="bi bi-trash-fill">Excluir</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

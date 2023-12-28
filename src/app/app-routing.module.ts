@@ -10,6 +10,9 @@ import { UpdateClienteComponent } from './components/cliente/update-cliente/upda
 import { ListVeiculosComponent } from './components/veiculo/list-veiculos/list-veiculos.component';
 import { CreateVeiculoComponent } from './components/veiculo/create-veiculo/create-veiculo.component';
 import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/update-veiculo.component';
+import { ListClienteVeiculoComponent } from './components/clienteVeiculo/list-cliente-veiculo/list-cliente-veiculo.component';
+import { CreateClienteVeiculoComponent } from './components/clienteVeiculo/create-cliente-veiculo/create-cliente-veiculo.component';
+import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/update-cliente-veiculo/update-cliente-veiculo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +26,9 @@ const routes: Routes = [
   { path: 'veiculos', component: ListVeiculosComponent },
   { path: 'create-veiculo', component: CreateVeiculoComponent },
   { path: 'update-veiculo/:codigoVeiculo', component: UpdateVeiculoComponent },
+  { path: 'clientes-veiculos', component: ListClienteVeiculoComponent },
+  { path: 'create-cliente-veiculo', component: CreateClienteVeiculoComponent },
+  { path: 'update-cliente-veiculo/:codigoClienteVeiculo', component: UpdateClienteVeiculoComponent },
 ];
 
 @NgModule({
