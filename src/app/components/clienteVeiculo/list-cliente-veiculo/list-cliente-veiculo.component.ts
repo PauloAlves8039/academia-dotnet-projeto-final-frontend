@@ -34,6 +34,20 @@ export class ListClienteVeiculoComponent implements OnInit {
     this.router.navigate([`/update-cliente-veiculo/${codigoClienteVeiculo}`]);
   }
 
+  async excluirClienteVeiculo(codigoClienteVeiculo: number) {
+    const confirmacao = confirm('Deseja realmente excluir esta associação entre Cliente e Veículo?');
+
+    if (confirmacao) {
+      try {
+        const resposta = await this.clienteVeiculoService.deleteClienteVeiculo(codigoClienteVeiculo);
+        alert('Associação entre Cliente e Veículo excluída com sucesso:'+ resposta);
+        this.getAllClientesVeiculos();
+      } catch (erro) {
+        console.error('Erro ao excluir associação entre Cliente e Veículo:', erro);
+      }
+    }
+  }
+
   getAllClientesVeiculos() {
     this.clienteVeiculoService.getClientesVeiculos().then((data) => {
       this.clientesVeiculos = data;
