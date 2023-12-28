@@ -1,0 +1,47 @@
+<div>
+  <h2 class="page-title">Veículos</h2>
+</div>
+
+<button class="btn button-success button-border" (click)="abrirCadastroDoVeiculo()">
+  <i class="bi bi-file-plus"></i> Cadastrar
+</button>
+
+<div class="mt-2">
+  <table class="table table-bordered table-hover text-table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Tipo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Cor</th>
+        <th scope="col">Ano</th>
+        <th scope="col">Observações</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let veiculo of veiculos">
+        <td>{{ veiculo.tipo }}</td>
+        <td>{{ veiculo.marca }}</td>
+        <td>{{ veiculo.modelo }}</td>
+        <td>{{ veiculo.cor }}</td>
+        <td>{{ veiculo.ano }}</td>
+        <td>{{ veiculo.observacoes }}</td>
+        <td>
+          <button type="button"
+                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  (click)="editarVeiculo(veiculo.codigoVeiculo)"
+                  title="Editar">
+            <i class="bi bi-pencil-square">Editar</i>
+          </button>
+          <button type="button"
+                  class="btn button-danger button-border btn-sm"
+                  (click)="excluirVeiculo(veiculo.codigoVeiculo)"
+                  title="Excluir">
+            <i class="bi bi-trash-fill">Excluir</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

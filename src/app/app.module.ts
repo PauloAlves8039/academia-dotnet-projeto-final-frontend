@@ -17,6 +17,9 @@ import { UpdateEnderecoComponent } from './components/endereco/update-endereco/u
 import { ListClientesComponent } from './components/cliente/list-clientes/list-clientes.component';
 import { CreateClienteComponent } from './components/cliente/create-cliente/create-cliente.component';
 import { UpdateClienteComponent } from './components/cliente/update-cliente/update-cliente.component';
+import { ListVeiculosComponent } from './components/veiculo/list-veiculos/list-veiculos.component';
+import { CreateVeiculoComponent } from './components/veiculo/create-veiculo/create-veiculo.component';
+import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/update-veiculo.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { UpdateClienteComponent } from './components/cliente/update-cliente/upda
     ListClientesComponent,
     CreateClienteComponent,
     UpdateClienteComponent,
+    ListVeiculosComponent,
+    CreateVeiculoComponent,
+    UpdateVeiculoComponent,
 
   ],
   imports: [

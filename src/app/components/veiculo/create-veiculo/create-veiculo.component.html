@@ -1,0 +1,102 @@
+<div class="container container-body">
+
+  <h2 class="page-title">Cadastrar Veículo</h2>
+
+  <hr>
+
+  <form (ngSubmit)="cadastrarVeiculo()" #enderecoForm="ngForm">
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="tipo" class="form-label">Tipo</label>
+          <select class="form-control input-form-sm"
+                  id="tipo"
+                  name="tipo"
+                  [(ngModel)]="novoVeiculo.tipo"
+                  required>
+            <option value="Moto">Moto</option>
+          </select>
+        </div>
+
+
+        <div class="mb-2">
+          <label for="marca" class="form-label">Marca</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="marca"
+                 name="marca"
+                 [(ngModel)]="novoVeiculo.marca"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="modelo" class="form-label">Modelo</label>
+          <input type="text"
+                 class="form-control input-form-md"
+                 id="modelo"
+                 name="modelo"
+                 [(ngModel)]="novoVeiculo.modelo"
+                 required>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="mb-2">
+          <label for="cor" class="form-label">Cor</label>
+          <input type="text"
+                 class="form-control input-form-lg"
+                 id="cor"
+                 name="cor"
+                 [(ngModel)]="novoVeiculo.cor"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="ano" class="form-label">Ano</label>
+          <input type="number"
+                 class="form-control input-form-sm"
+                 id="ano"
+                 name="ano"
+                 [(ngModel)]="novoVeiculo.ano"
+                 required>
+        </div>
+
+        <div class="mb-2">
+          <label for="observacoes" class="form-label">Observações</label>
+          <textarea
+            class="form-control"
+            id="observacoes"
+            name="observacoes"
+            [(ngModel)]="novoVeiculo.observacoes"
+            rows="3"
+            style="resize: none;"
+            maxlength="150"
+            required>
+          </textarea>
+        </div>
+
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="mt-2">
+      <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
+        <i class="bi bi-floppy"></i> Salvar
+      </button>
+      <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposVeiculo()" title="Cancelar">
+        <i class="bi bi-x-square"></i> Cancelar
+      </button>
+      <button type="button" class="btn button-info button-form ms-2" (click)="voltarParaListaDeVeiculos()" title="Lista de Veículos">
+        <i class="bi bi-arrow-left-square"></i> Voltar
+      </button>
+    </div>
+
+  </form>
+
+</div>
