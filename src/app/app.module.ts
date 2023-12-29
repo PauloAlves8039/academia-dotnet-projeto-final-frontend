@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RealBrasileiroPipe } from './shared/pipes/moedas/RealBrasileiro.pipe';
 import { ListEnderecosComponent } from './components/endereco/list-enderecos/list-enderecos.component';
 import { CreateEnderecoComponent } from './components/endereco/create-endereco/create-endereco.component';
 import { UpdateEnderecoComponent } from './components/endereco/update-endereco/update-endereco.component';
@@ -23,6 +22,10 @@ import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/upda
 import { ListClienteVeiculoComponent } from './components/clienteVeiculo/list-cliente-veiculo/list-cliente-veiculo.component';
 import { CreateClienteVeiculoComponent } from './components/clienteVeiculo/create-cliente-veiculo/create-cliente-veiculo.component';
 import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/update-cliente-veiculo/update-cliente-veiculo.component';
+import { ListPermanenciasComponent } from './components/permanencia/list-permanencias/list-permanencias.component';
+import { CreatePermanenciaComponent } from './components/permanencia/create-permanencia/create-permanencia.component';
+import { RealBrasileiroPipe } from './shared/pipes/moedas/real/RealBrasileiro.pipe';
+import { FormatoDataBasicoPipe } from './shared/pipes/formatoDatas/basico/FormatoDataBasico.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/updat
     NavbarComponent,
     FooterComponent,
     RealBrasileiroPipe,
+    FormatoDataBasicoPipe,
     ListEnderecosComponent,
     CreateEnderecoComponent,
     UpdateEnderecoComponent,
@@ -43,6 +47,8 @@ import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/updat
     ListClienteVeiculoComponent,
     CreateClienteVeiculoComponent,
     UpdateClienteVeiculoComponent,
+    ListPermanenciasComponent,
+    CreatePermanenciaComponent,
 
   ],
   imports: [

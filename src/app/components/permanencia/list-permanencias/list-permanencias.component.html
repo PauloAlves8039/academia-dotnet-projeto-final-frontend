@@ -1,0 +1,57 @@
+<div>
+  <h2 class="page-title">Permanências de Motos</h2>
+</div>
+
+<button class="btn button-success button-border" (click)="abrirCadastroDePermanencia()">
+  <i class="bi bi-file-plus"></i> Cadastrar
+</button>
+
+<div class="mt-2">
+  <table class="table table-bordered table-hover text-table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Código Cliente e Veículo</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Entrada</th>
+        <th scope="col">Saída</th>
+        <th scope="col">Taxa por Hora</th>
+        <th scope="col">Valor Total</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let permanencia of permanencias">
+        <td>{{ permanencia.clienteVeiculoId }}</td>
+        <td>{{ permanencia.placa }}</td>
+        <td>{{ permanencia.dataEntrada | FormatoDataBasico }}</td>
+        <td>{{ permanencia.dataSaida | FormatoDataBasico }}</td>
+        <td>{{ permanencia.taxaPorHora | RealBrasileiro }}</td>
+        <td>{{ permanencia.valorTotal | RealBrasileiro }}</td>
+        <td>{{ permanencia.estadoPermanencia }}</td>
+
+        <td>
+          <button type="button"
+                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  (click)="atualizarPermanencia(permanencia)"
+                  title="Editar" >
+            <i class="bi bi-pencil-square">Editar</i>
+          </button>
+          <button type="button"
+                  class="btn button-info button-border btn-sm btn-sm me-1"
+                  (click)="gerarPDF(permanencia)"
+                  title="Gerar PDF" >
+            <i class="bi bi-pencil-square">PDF</i>
+          </button>
+          <button type="button"
+                  class="btn button-danger button-border btn-sm"
+                  (click)="excluirPermanencia(permanencia.codigoPermanencia)"
+                  title="Excluir">
+            <i class="bi bi-trash-fill">Excluir</i>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

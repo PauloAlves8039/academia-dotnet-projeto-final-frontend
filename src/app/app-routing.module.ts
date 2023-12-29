@@ -13,6 +13,8 @@ import { UpdateVeiculoComponent } from './components/veiculo/update-veiculo/upda
 import { ListClienteVeiculoComponent } from './components/clienteVeiculo/list-cliente-veiculo/list-cliente-veiculo.component';
 import { CreateClienteVeiculoComponent } from './components/clienteVeiculo/create-cliente-veiculo/create-cliente-veiculo.component';
 import { UpdateClienteVeiculoComponent } from './components/clienteVeiculo/update-cliente-veiculo/update-cliente-veiculo.component';
+import { ListPermanenciasComponent } from './components/permanencia/list-permanencias/list-permanencias.component';
+import { CreatePermanenciaComponent } from './components/permanencia/create-permanencia/create-permanencia.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +31,8 @@ const routes: Routes = [
   { path: 'clientes-veiculos', component: ListClienteVeiculoComponent },
   { path: 'create-cliente-veiculo', component: CreateClienteVeiculoComponent },
   { path: 'update-cliente-veiculo/:codigoClienteVeiculo', component: UpdateClienteVeiculoComponent },
+  { path: 'permanencias', component: ListPermanenciasComponent },
+  { path: 'create-permanencia', component: CreatePermanenciaComponent },
 ];
 
 @NgModule({

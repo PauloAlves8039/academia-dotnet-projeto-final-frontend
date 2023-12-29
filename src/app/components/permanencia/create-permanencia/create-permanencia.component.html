@@ -1,0 +1,66 @@
+<div>
+  <h2 class="page-title">Cadastro de Permanência</h2>
+</div>
+
+<hr>
+
+<div class="permanencia-form">
+  <form (submit)="cadastrarPermanencia()">
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="mb-2 input-form-md">
+          <label for="clienteVeiculoId" class="form-label">Código Cliente e Veículo</label>
+
+          <select class="form-control input-form-lg"
+                  id="clienteVeiculoId"
+                  [(ngModel)]="permanenciaData.clienteVeiculoId"
+                  name="clienteVeiculoId"
+                  required>
+            <option *ngFor="let codigoClienteVeiculo of codigosClientesVeiculos" [value]="codigoClienteVeiculo">
+              {{ codigoClienteVeiculo }}
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="mb-2 input-form-md">
+          <label for="placa" class="form-label">Placa</label>
+          <input type="text"
+                 class="form-control"
+                 id="placa"
+                 [(ngModel)]="permanenciaData.placa"
+                 name="placa"
+                 required>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <div class="mb-2 input-form-md">
+          <label for="dataEntrada" class="form-label">Data de Entrada</label>
+          <input type="datetime-local"
+                 class="form-control"
+                 id="dataEntrada"
+                 [(ngModel)]="permanenciaData.dataEntrada" name="dataEntrada"
+                 required>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
+      <i class="bi bi-floppy"></i> Salvar
+    </button>
+    <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposPermanencia()" title="Cancelar">
+      <i class="bi bi-x-square"></i> Cancelar
+    </button>
+    <button type="button" class="btn button-info button-form ms-2" (click)="voltarParaListaPermanencias()" title="Lista de Permanências">
+      <i class="bi bi-arrow-left-square"></i> Voltar
+    </button>
+  </form>
+</div>
