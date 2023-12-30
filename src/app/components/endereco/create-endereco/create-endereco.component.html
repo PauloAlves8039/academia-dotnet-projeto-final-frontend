@@ -112,7 +112,7 @@
     <hr>
 
     <div class="mt-2">
-      <button type="submit" class="btn button-success button-form" title="Salvar">
+      <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
         <i class="bi bi-floppy"></i> Salvar
       </button>
       <button type="button" class="btn button-cancel button-form ms-2" title="Cancelar"

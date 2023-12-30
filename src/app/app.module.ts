@@ -27,6 +27,7 @@ import { CreatePermanenciaComponent } from './components/permanencia/create-perm
 import { RealBrasileiroPipe } from './shared/pipes/moedas/real/RealBrasileiro.pipe';
 import { FormatoDataBasicoPipe } from './shared/pipes/formatoDatas/basico/FormatoDataBasico.pipe';
 import { PaginacaoComponent } from './shared/components/paginacao/paginacao/paginacao.component';
+import { SpinnerComponent } from './shared/components/spinner/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PaginacaoComponent } from './shared/components/paginacao/paginacao/pagi
     NavbarComponent,
     FooterComponent,
     PaginacaoComponent,
+    SpinnerComponent,
     RealBrasileiroPipe,
     FormatoDataBasicoPipe,
     ListEnderecosComponent,
