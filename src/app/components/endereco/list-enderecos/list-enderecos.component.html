@@ -1,50 +1,88 @@
-<div>
-  <h2 class="page-title">Endereços</h2>
-</div>
+<div class="container-body">
+  <div>
+    <h2 class="page-title">Endereços</h2>
+  </div>
 
-<button class="btn button-success button-border" (click)="abrirCadstroDeEndereco()">
-  <i class="bi bi-file-plus"></i> Cadastrar
-</button>
+  <div class="row mt-4">
+    <div class="col-md-8 mb-2">
+      <div class="d-flex align-items-end">
+        <label for="termoDePesquisaEndereco" class="me-3 mb-2">Pesquisar:</label>
+        <input type="text"
+               class="form-control input-form-lg"
+               id="termoDePesquisaEndereco"
+               [(ngModel)]="termoDePesquisaEndereco" />
 
-<div class="cliente-table mt-2">
-  <table class="table table-bordered table-hover text-table">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Logradouro</th>
-        <th scope="col">Número</th>
-        <th scope="col">Complemento</th>
-        <th scope="col">Bairro</th>
-        <th scope="col">Cidade</th>
-        <th scope="col">Estado</th>
-        <th scope="col">CEP</th>
-        <th scope="col">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let endereco of enderecos">
-        <td>{{ endereco.logradouro }}</td>
-        <td>{{ endereco.numero }}</td>
-        <td>{{ endereco.complemento }}</td>
-        <td>{{ endereco.bairro }}</td>
-        <td>{{ endereco.cidade }}</td>
-        <td>{{ endereco.estado }}</td>
-        <td>{{ endereco.cep }}</td>
-        <td>
-          <button type="button"
-                  class="btn button-warning button-border btn-sm btn-sm me-1"
-                  (click)="editarEndereco(endereco.codigoEndereco)"
-                  title="Editar">
-            <i class="bi bi-pencil-square">Editar</i>
+        <div class="col-md-3 ms-2">
+          <button class="btn button-info button-border button-form" (click)="pesquisarEnderecos()">
+            <i class="bi bi-search"></i> Pesquisar
           </button>
-          <button type="button"
-                  class="btn button-danger button-border btn-sm"
-                  (click)="excluirEndereco(endereco.codigoEndereco)"
-                  title="Excluir">
-            <i class="bi bi-trash-fill">Excluir</i>
-          </button>
+        </div>
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="col-md-3 ms-2">
+          <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
+            <i class="bi bi-x-square"></i> Cancelar
+          </button>
+        </div>
+
+        <div class="col-md-3 ms-2">
+          <button class="btn button-success button-border button-form" (click)="abrirCadastroDeEndereco()">
+            <i class="bi bi-file-plus"></i> Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <table class="table table-bordered table-hover text-table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Logradouro</th>
+          <th scope="col">Número</th>
+          <th scope="col">Complemento</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let endereco of enderecosFiltrados">
+          <td>{{ endereco.logradouro }}</td>
+          <td>{{ endereco.numero }}</td>
+          <td>{{ endereco.complemento }}</td>
+          <td>{{ endereco.bairro }}</td>
+          <td>{{ endereco.cidade }}</td>
+          <td>{{ endereco.estado }}</td>
+          <td>{{ endereco.cep }}</td>
+          <td>
+            <button type="button"
+                    class="btn button-warning button-border btn-sm btn-sm me-1"
+                    (click)="editarEndereco(endereco.codigoEndereco)"
+                    title="Editar">
+              <i class="bi bi-pencil-square">Editar</i>
+            </button>
+            <button type="button"
+                    class="btn button-danger button-border btn-sm"
+                    (click)="excluirEndereco(endereco.codigoEndereco)"
+                    title="Excluir">
+              <i class="bi bi-trash-fill">Excluir</i>
+            </button>
+
+          </td>
+        </tr>
+        <tr *ngIf="enderecosFiltrados.length === 0">
+          <td colspan="8" class="text-center">Nenhum endereço encontrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-paginacao
+    [paginaAtual]="paginaAtual"
+    [totalDePaginas]="totalDePaginas"
+    (trocarPagina)="trocarPagina($event)">
+  </app-paginacao>
+
 </div>

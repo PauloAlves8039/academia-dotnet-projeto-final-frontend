@@ -1,40 +1,77 @@
-<div>
-  <h2 class="page-title">Clientes e Veículos Associados</h2>
-</div>
+<div class="container-body">
+  <div>
+    <h2 class="page-title">Clientes e Veículos Associados</h2>
+  </div>
 
-<button class="btn button-success button-border" (click)="abrirCadastroDeClienteVeiculo()">
-  <i class="bi bi-file-plus"></i> Cadastrar
-</button>
+  <div class="row mt-4">
+    <div class="col-md-8 mb-2">
+      <div class="d-flex align-items-end">
+        <label for="termoDePesquisaClientesVeiculos" class="me-3 mb-2">Pesquisar:</label>
+        <input type="text"
+               class="form-control input-form-lg"
+               id="termoDePesquisaClientesVeiculos"
+          [(ngModel)]="termoDePesquisaClientesVeiculos" />
 
-<div class="mt-2">
-  <table class="table table-bordered table-hover text-table">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Cliente</th>
-        <th scope="col">Veículo</th>
-        <th scope="col">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let clienteVeiculo of clientesVeiculos">
-        <td>{{ encontrarNomeDoCliente(clienteVeiculo.clienteId) }}</td>
-        <td>{{ encontrarMarcaDoVeiculo(clienteVeiculo.veiculoId) }}</td>
-        <td>
-          <button type="button"
-                  class="btn button-warning button-border btn-sm btn-sm me-1"
-                  (click)="editarClienteVeiculo(clienteVeiculo.codigoClienteVeiculo)"
-                  title="Editar">
-            <i class="bi bi-pencil-square">Editar</i>
+        <div class="col-md-3 ms-2">
+          <button class="btn button-info button-border button-form" (click)="pesquisarClientesVeiculos()">
+            <i class="bi bi-search"></i> Pesquisar
           </button>
-          <button type="button"
-                  class="btn button-danger button-border btn-sm"
-                  (click)="excluirClienteVeiculo(clienteVeiculo.codigoClienteVeiculo)"
-                  title="Excluir">
-            <i class="bi bi-trash-fill">Excluir</i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </div>
 
+        <div class="col-md-3 ms-2">
+          <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
+            <i class="bi bi-x-square"></i> Cancelar
+          </button>
+        </div>
+
+        <div class="col-md-3 ms-2">
+          <button class="btn button-success button-border button-form" (click)="abrirCadastroDeClienteVeiculo()">
+            <i class="bi bi-file-plus"></i> Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <table class="table table-bordered table-hover text-table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Cliente</th>
+          <th scope="col">Veículo</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clienteVeiculo of clientesVeiculosFiltrados">
+          <td>{{ encontrarNomeDoCliente(clienteVeiculo.clienteId) }}</td>
+          <td>{{ encontrarMarcaDoVeiculo(clienteVeiculo.veiculoId) }}</td>
+          <td>
+            <button type="button"
+                    class="btn button-warning button-border btn-sm btn-sm me-1"
+                    (click)="editarClienteVeiculo(clienteVeiculo.codigoClienteVeiculo)"
+                    title="Editar">
+              <i class="bi bi-pencil-square">Editar</i>
+            </button>
+            <button type="button"
+                    class="btn button-danger button-border btn-sm"
+                    (click)="excluirClienteVeiculo(clienteVeiculo.codigoClienteVeiculo)"
+                    title="Excluir">
+              <i class="bi bi-trash-fill">Excluir</i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="clientesVeiculosFiltrados.length === 0">
+          <td colspan="8" class="text-center">Nenhum cliente e veículo encontrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-paginacao
+    [paginaAtual]="paginaAtual"
+    [totalDePaginas]="totalDePaginas"
+    (trocarPagina)="trocarPagina($event)">
+  </app-paginacao>
+
+</div>

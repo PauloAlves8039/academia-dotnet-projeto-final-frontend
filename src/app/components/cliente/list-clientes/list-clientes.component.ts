@@ -10,6 +10,11 @@ import { EnderecoService } from '../../../services/endereco/endereco.service';
 })
 export class ListClientesComponent implements OnInit {
   clientes: any[] = [];
+  clientesFiltrados: any[] = [];
+  termoDePesquisaCliente: string = '';
+  itensPorPagina: number = 5;
+  paginaAtual: number = 1;
+  totalDePaginas: number = 1;
 
   constructor(
     private clienteService: ClienteService,
@@ -28,18 +33,9 @@ export class ListClientesComponent implements OnInit {
     this.router.navigate([`/update-cliente/${codigoCliente}`]);
   }
 
-  async excluirCliente(codigoCliente: number) {
-    const confirmacao = confirm('Deseja realmente excluir este cliente?');
-
-    if (confirmacao) {
-      try {
-        const resposta = await this.clienteService.deleteCliente(codigoCliente);
-        alert('Cliente excluído com sucesso:'+ resposta);
-        this.getAllClientes();
-      } catch (erro) {
-        console.error('Erro ao excluir endereço:', erro);
-      }
-    }
+  trocarPagina(pagina: number) {
+    this.paginaAtual = pagina;
+    this.atualizarClientesFiltrados();
   }
 
   async getAllClientes(): Promise<any[]> {
@@ -55,11 +51,55 @@ export class ListClientesComponent implements OnInit {
 
       this.clientes = clientesComEndereco;
 
+      this.clientesFiltrados = clientes;
+      this.pesquisarClientes();
+
       return clientesComEndereco;
     } catch (error) {
       console.error('Erro ao buscar todos os clientes: ', error);
       return [];
     }
+  }
+
+  pesquisarClientes() {
+    if (this.termoDePesquisaCliente.trim() !== '') {
+      this.clientesFiltrados = this.clientes.filter(cliente =>
+        cliente.nome.toLowerCase().includes(this.termoDePesquisaCliente.toLowerCase()) ||
+        cliente.cpf.includes(this.termoDePesquisaCliente)
+      );
+
+      this.totalDePaginas = Math.max(1, Math.ceil(this.clientesFiltrados.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    } else {
+      this.clientesFiltrados = this.clientes.slice(0, this.itensPorPagina);
+      this.totalDePaginas = Math.max(1, Math.ceil(this.clientes.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    }
+  }
+
+  atualizarClientesFiltrados() {
+    const indiceInicial = (this.paginaAtual - 1) * this.itensPorPagina;
+    const indiceFinal = indiceInicial + this.itensPorPagina;
+    this.clientesFiltrados = this.clientes.slice(indiceInicial, indiceFinal);
+  }
+
+  async excluirCliente(codigoCliente: number) {
+    const confirmacao = confirm('Deseja realmente excluir este cliente?');
+
+    if (confirmacao) {
+      try {
+        const resposta = await this.clienteService.deleteCliente(codigoCliente);
+        alert('Cliente excluído com sucesso:'+ resposta);
+        this.getAllClientes();
+      } catch (erro) {
+        console.error('Erro ao excluir endereço:', erro);
+      }
+    }
+  }
+
+  limparCampoPesquisa() {
+    this.termoDePesquisaCliente = '';
+    this.getAllClientes();
   }
 
   formatarData(data: string): string {

@@ -51,6 +51,7 @@ export class CreatePermanenciaComponent implements OnInit {
           .addPermanencia(this.permanenciaData)
           .then((result) => {
             alert('Permanência cadastrada com sucesso!');
+            this.limparCamposPermanencia();
           })
           .catch((error) => {
             console.error('Erro ao cadastrar permanência:', error);

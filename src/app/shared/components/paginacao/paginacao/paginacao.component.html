@@ -1,0 +1,19 @@
+<nav>
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="paginaAtual === 1">
+      <a class="page-link" (click)="trocarPagina.emit(paginaAtual - 1)" aria-label="Anterior">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <li class="page-item" *ngFor="let pagina of paginas()">
+      <a class="page-link" (click)="trocarPagina.emit(pagina)">{{ pagina }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="paginaAtual === totalDePaginas">
+      <a class="page-link" (click)="trocarPagina.emit(paginaAtual + 1)" aria-label="Próximo">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -26,6 +26,7 @@ import { ListPermanenciasComponent } from './components/permanencia/list-permane
 import { CreatePermanenciaComponent } from './components/permanencia/create-permanencia/create-permanencia.component';
 import { RealBrasileiroPipe } from './shared/pipes/moedas/real/RealBrasileiro.pipe';
 import { FormatoDataBasicoPipe } from './shared/pipes/formatoDatas/basico/FormatoDataBasico.pipe';
+import { PaginacaoComponent } from './shared/components/paginacao/paginacao/paginacao.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FormatoDataBasicoPipe } from './shared/pipes/formatoDatas/basico/Format
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+    PaginacaoComponent,
     RealBrasileiroPipe,
     FormatoDataBasicoPipe,
     ListEnderecosComponent,

@@ -13,6 +13,11 @@ export class ListPermanenciasComponent implements OnInit {
   permanencia: Permanencia = new Permanencia();
   permanencias!: any[];
   clientesVeiculos!: any[];
+  permanenciasFiltradas: any[] = [];
+  termoDePesquisaPermanencia: string = '';
+  itensPorPagina: number = 5;
+  paginaAtual: number = 1;
+  totalDePaginas: number = 1;
 
   constructor(
     private permanenciaService: PermanenciaService,
@@ -23,8 +28,20 @@ export class ListPermanenciasComponent implements OnInit {
     this.getAllPermanencias();
   }
 
+  trocarPagina(pagina: number) {
+    this.paginaAtual = pagina;
+    this.atualizarPermanenciasFiltradas();
+  }
+
   abrirCadastroDePermanencia() {
     this.router.navigate(['/create-permanencia']);
+  }
+
+  getAllPermanencias() {
+    this.permanenciaService.getPermanencias().then((data) => {
+      this.permanencias = data;
+      this.pesquisarPermanencias();
+    });
   }
 
   async atualizarPermanencia(dadosAtualizados: any) {
@@ -38,6 +55,27 @@ export class ListPermanenciasComponent implements OnInit {
     } catch (error) {
       console.error('Erro ao atualizar permanência: ', error);
     }
+  }
+
+  pesquisarPermanencias() {
+    if (this.termoDePesquisaPermanencia.trim() !== '') {
+      this.permanenciasFiltradas = this.permanencias.filter(permanencia =>
+        permanencia.placa.toLowerCase().includes(this.termoDePesquisaPermanencia.toLowerCase())
+      );
+
+      this.totalDePaginas = Math.max(1, Math.ceil(this.permanenciasFiltradas.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    } else {
+      this.permanenciasFiltradas = this.permanencias.slice(0, this.itensPorPagina);
+      this.totalDePaginas = Math.max(1, Math.ceil(this.permanencias.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    }
+  }
+
+  atualizarPermanenciasFiltradas() {
+    const indiceInicial = (this.paginaAtual - 1) * this.itensPorPagina;
+    const indiceFinal = indiceInicial + this.itensPorPagina;
+    this.permanenciasFiltradas = this.permanencias.slice(indiceInicial, indiceFinal);
   }
 
   async excluirPermanencia(codigoPermanencia: number) {
@@ -56,10 +94,9 @@ export class ListPermanenciasComponent implements OnInit {
     }
   }
 
-  getAllPermanencias() {
-    this.permanenciaService.getPermanencias().then((data) => {
-      this.permanencias = data;
-    });
+  limparCampoPesquisa() {
+    this.termoDePesquisaPermanencia = '';
+    this.getAllPermanencias();
   }
 
   gerarPDF(permanencia: Permanencia) {

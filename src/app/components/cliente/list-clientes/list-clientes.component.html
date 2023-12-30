@@ -1,10 +1,38 @@
+<div class="container-body">
 <div>
   <h2 class="page-title">Clientes</h2>
 </div>
 
-<button class="btn button-success button-border" (click)="abrirCadastroDeCliente()">
-  <i class="bi bi-file-plus"></i> Cadastrar
-</button>
+<div class="row mt-4">
+  <div class="col-md-8 mb-2">
+    <div class="d-flex align-items-end">
+      <label for="termoDePesquisaCliente" class="me-3 mb-2">Pesquisar:</label>
+      <input type="text"
+             class="form-control input-form-lg"
+             id="termoDePesquisaCliente"
+             [(ngModel)]="termoDePesquisaCliente" />
+
+      <div class="col-md-3 ms-2">
+        <button class="btn button-info button-border button-form" (click)="pesquisarClientes()">
+          <i class="bi bi-search"></i> Pesquisar
+        </button>
+      </div>
+
+      <div class="col-md-3 ms-2">
+        <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
+          <i class="bi bi-x-square"></i> Cancelar
+        </button>
+      </div>
+
+      <div class="col-md-3 ms-2">
+        <button class="btn button-success button-border button-form" (click)="abrirCadastroDeCliente()">
+          <i class="bi bi-file-plus"></i> Adicionar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <div class="mt-2">
   <table class="table table-bordered table-hover text-table">
@@ -20,7 +48,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cliente of clientes">
+      <tr *ngFor="let cliente of clientesFiltrados">
         <td>{{ cliente.nome }}</td>
         <td>{{ formatarData(cliente.dataNascimento) }}</td>
         <td>{{ cliente.cpf }}</td>
@@ -42,6 +70,17 @@
           </button>
         </td>
       </tr>
+      <tr *ngIf="clientesFiltrados.length === 0">
+        <td colspan="8" class="text-center">Nenhum cliente encontrado.</td>
+      </tr>
     </tbody>
   </table>
+ </div>
+
+ <app-paginacao
+    [paginaAtual]="paginaAtual"
+    [totalDePaginas]="totalDePaginas"
+    (trocarPagina)="trocarPagina($event)">
+  </app-paginacao>
+
 </div>

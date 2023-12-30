@@ -6,7 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RealBrasileiroPipe implements PipeTransform {
 
   transform(value: number): string {
-    return `R$ ${value.toFixed(2)}`;
+    const formatoDaMoeda = 'pt-BR';
+    const estiloDaMoeda = 'BRL';
+
+    if (isNaN(value) || value === null) {
+      return '';
+    }
+    return value.toLocaleString(formatoDaMoeda, { style: 'currency', currency: estiloDaMoeda });
   }
 
 }

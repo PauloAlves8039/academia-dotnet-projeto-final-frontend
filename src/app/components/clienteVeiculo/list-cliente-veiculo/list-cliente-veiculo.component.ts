@@ -13,6 +13,11 @@ export class ListClienteVeiculoComponent implements OnInit {
   clientesVeiculos!: any[];
   clientes: any[] = [];
   veiculos: any[] = [];
+  clientesVeiculosFiltrados: any[] = [];
+  termoDePesquisaClientesVeiculos: string = '';
+  itensPorPagina: number = 5;
+  paginaAtual: number = 1;
+  totalDePaginas: number = 1;
 
   constructor(
     private clienteVeiculoService: ClienteVeiculoService,
@@ -34,6 +39,41 @@ export class ListClienteVeiculoComponent implements OnInit {
     this.router.navigate([`/update-cliente-veiculo/${codigoClienteVeiculo}`]);
   }
 
+  trocarPagina(pagina: number) {
+    this.paginaAtual = pagina;
+    this.atualizarClientesVeiculosFiltrados();
+  }
+
+  getAllClientesVeiculos() {
+    this.clienteVeiculoService.getClientesVeiculos().then((data) => {
+      this.clientesVeiculos = data;
+      this.pesquisarClientesVeiculos();
+    });
+  }
+
+  pesquisarClientesVeiculos() {
+    if (this.termoDePesquisaClientesVeiculos.trim() !== '') {
+      this.clientesVeiculosFiltrados = this.clientesVeiculos.filter(clienteVeiculo =>
+        this.encontrarNomeDoCliente(clienteVeiculo.clienteId)
+          .toLowerCase()
+          .includes(this.termoDePesquisaClientesVeiculos.toLowerCase())
+      );
+
+      this.totalDePaginas = Math.max(1, Math.ceil(this.clientesVeiculosFiltrados.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    } else {
+      this.clientesVeiculosFiltrados = this.clientesVeiculos.slice(0, this.itensPorPagina);
+      this.totalDePaginas = Math.max(1, Math.ceil(this.clientesVeiculos.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    }
+  }
+
+  atualizarClientesVeiculosFiltrados() {
+    const indiceInicial = (this.paginaAtual - 1) * this.itensPorPagina;
+    const indiceFinal = indiceInicial + this.itensPorPagina;
+    this.clientesVeiculosFiltrados = this.clientesVeiculos.slice(indiceInicial, indiceFinal);
+  }
+
   async excluirClienteVeiculo(codigoClienteVeiculo: number) {
     const confirmacao = confirm('Deseja realmente excluir esta associação entre Cliente e Veículo?');
 
@@ -48,10 +88,9 @@ export class ListClienteVeiculoComponent implements OnInit {
     }
   }
 
-  getAllClientesVeiculos() {
-    this.clienteVeiculoService.getClientesVeiculos().then((data) => {
-      this.clientesVeiculos = data;
-    });
+  limparCampoPesquisa() {
+    this.termoDePesquisaClientesVeiculos = '';
+    this.getAllClientesVeiculos();
   }
 
   getAllClientes() {

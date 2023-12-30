@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
 })
 export class ListVeiculosComponent implements OnInit {
   veiculos: any[] = [];
+  veiculosFiltrados: any[] = [];
+  termoDePesquisaVeiculo: string = '';
+  itensPorPagina: number = 5;
+  paginaAtual: number = 1;
+  totalDePaginas: number = 1;
 
   constructor(
     private veiculoService: VeiculoService,
@@ -18,19 +23,40 @@ export class ListVeiculosComponent implements OnInit {
     this.getAllVeiculos();
   }
 
-  // async excluirEndereco(codigoEndereco: number) {
-  //   const confirmacao = confirm('Deseja realmente excluir este endereço?');
+  trocarPagina(pagina: number) {
+    this.paginaAtual = pagina;
+    this.atualizarVeiculosFiltrados();
+  }
 
-  //   if (confirmacao) {
-  //     try {
-  //       const resposta = await this.enderecoService.deleteEndereco(codigoEndereco);
-  //       alert('Endereço excluído com sucesso:'+ resposta);
-  //       this.getAllEnderecos();
-  //     } catch (erro) {
-  //       console.error('Erro ao excluir endereço:', erro);
-  //     }
-  //   }
-  // }
+  getAllVeiculos() {
+    this.veiculoService.getVeiculos().then((data) => {
+      this.veiculos = data;
+      this.veiculosFiltrados = data;
+      this.pesquisarVeiculos();
+    });
+  }
+
+  pesquisarVeiculos() {
+    if (this.termoDePesquisaVeiculo.trim() !== '') {
+      this.veiculosFiltrados = this.veiculos.filter(veiculo =>
+        veiculo.marca.toLowerCase().includes(this.termoDePesquisaVeiculo.toLowerCase()) ||
+        veiculo.modelo.includes(this.termoDePesquisaVeiculo)
+      );
+
+      this.totalDePaginas = Math.max(1, Math.ceil(this.veiculosFiltrados.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    } else {
+      this.veiculosFiltrados = this.veiculos.slice(0, this.itensPorPagina);
+      this.totalDePaginas = Math.max(1, Math.ceil(this.veiculos.length / this.itensPorPagina));
+      this.paginaAtual = 1;
+    }
+  }
+
+  atualizarVeiculosFiltrados() {
+    const indiceInicial = (this.paginaAtual - 1) * this.itensPorPagina;
+    const indiceFinal = indiceInicial + this.itensPorPagina;
+    this.veiculosFiltrados = this.veiculos.slice(indiceInicial, indiceFinal);
+  }
 
   async excluirVeiculo(codigoVeiculo: number) {
     const confirmacao = confirm('Deseja realmente excluir este veículo?');
@@ -46,17 +72,16 @@ export class ListVeiculosComponent implements OnInit {
     }
   }
 
+  limparCampoPesquisa() {
+    this.termoDePesquisaVeiculo = '';
+    this.getAllVeiculos();
+  }
+
   abrirCadastroDoVeiculo() {
     this.router.navigate(['/create-veiculo']);
   }
 
   editarVeiculo(codigoVeiculo: number) {
     this.router.navigate([`/update-veiculo/${codigoVeiculo}`]);
-  }
-
-  getAllVeiculos() {
-    this.veiculoService.getVeiculos().then((data) => {
-      this.veiculos = data;
-    });
   }
 }
