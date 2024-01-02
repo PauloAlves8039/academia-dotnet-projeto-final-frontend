@@ -7,15 +7,49 @@ import { ClienteVeiculo } from '../../models/clienteVeiculo/ClienteVeiculo';
 })
 export class ClienteVeiculoService {
   private apiUrl = 'https://localhost:7269/api/ClienteVeiculo';
+  private apiUrlCliente = 'https://localhost:7269/api/Cliente';
+  private apiUrlVeiculo = 'https://localhost:7269/api/Veiculo';
 
   constructor() {}
 
-  async getClientesVeiculos() {
+  async getClientesVeiculos(): Promise<ClienteVeiculo[]> {
     try {
       const response = await axios.get(this.apiUrl);
-      return response.data;
+      const clientesVeiculos = response.data;
+
+      const detalhesClientesVeiculos = await Promise.all(
+        clientesVeiculos.map(async (cv: ClienteVeiculo) => {
+          try {
+            const clienteResponse = await this.getDetalhesCliente(cv.clienteId);
+            const veiculoResponse = await this.getDetalhesVeiculo(cv.veiculoId);
+
+            return {
+              codigoClienteVeiculo: cv.codigoClienteVeiculo,
+              clienteId: cv.clienteId,
+              veiculoId: cv.veiculoId,
+              nomeCliente: clienteResponse.data.nome,
+              marcaVeiculo: veiculoResponse.data.marca,
+            };
+          } catch (innerError) {
+            console.error(
+              `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
+              innerError
+            );
+            return {
+              codigoClienteVeiculo: cv.codigoClienteVeiculo,
+              clienteId: cv.clienteId,
+              veiculoId: cv.veiculoId,
+              nomeCliente: 'Nome não disponível',
+              marcaVeiculo: 'Marca não disponível',
+            };
+          }
+        })
+      );
+
+      return detalhesClientesVeiculos;
     } catch (error) {
       console.error('Erro ao buscar todos os clientes e veículos vinculados: ', error);
+      throw error;
     }
   }
 
@@ -56,6 +90,16 @@ export class ClienteVeiculoService {
     } catch (error) {
       console.error('Erro ao excluir associação entre cliente e veículo: ', error);
     }
+  }
+
+  async getDetalhesCliente(clienteId: number) {
+    const urlCliente = `${this.apiUrlCliente}/${clienteId}`;
+    return axios.get(urlCliente);
+  }
+
+  async getDetalhesVeiculo(veiculoId: number) {
+    const urlVeiculo = `${this.apiUrlVeiculo}/${veiculoId}`;
+    return axios.get(urlVeiculo);
   }
 
 }

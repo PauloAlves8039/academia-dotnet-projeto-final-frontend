@@ -39,7 +39,7 @@
     <table class="table table-bordered table-hover text-table">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Código Cliente e Veículo</th>
+          <th scope="col">Cliente e Veículo</th>
           <th scope="col">Placa</th>
           <th scope="col">Entrada</th>
           <th scope="col">Saída</th>
@@ -51,7 +51,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let permanencia of permanenciasFiltradas">
-          <td>{{ permanencia.clienteVeiculoId }}</td>
+          <td>
+              {{ encontrarNomeCliente(permanencia.clienteVeiculoId) }} -
+              {{ encontrarMarcaVeiculo(permanencia.clienteVeiculoId) }}
+          </td>
           <td>{{ permanencia.placa }}</td>
           <td>{{ permanencia.dataEntrada | FormatoDataBasico }}</td>
           <td>{{ permanencia.dataSaida | FormatoDataBasico }}</td>

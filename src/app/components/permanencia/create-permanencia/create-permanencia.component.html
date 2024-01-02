@@ -13,15 +13,11 @@
         <div class="mb-2 input-form-md">
           <label for="clienteVeiculoId" class="form-label">Código Cliente e Veículo</label>
 
-          <select class="form-control input-form-lg"
-                  id="clienteVeiculoId"
-                  [(ngModel)]="permanenciaData.clienteVeiculoId"
-                  name="clienteVeiculoId"
-                  required>
-            <option *ngFor="let codigoClienteVeiculo of codigosClientesVeiculos" [value]="codigoClienteVeiculo">
-              {{ codigoClienteVeiculo }}
+          <select class="form-control input-form-lg" id="clienteVeiculoId" [(ngModel)]="permanenciaData.clienteVeiculoId"
+            name="clienteVeiculoId" required>
+            <option *ngFor="let clienteVeiculo of codigosClientesVeiculos" [value]="clienteVeiculo.clienteVeiculoId">
+              {{ clienteVeiculo.nomeCliente }} - {{ clienteVeiculo.marcaVeiculo }}
             </option>
-
           </select>
 
         </div>

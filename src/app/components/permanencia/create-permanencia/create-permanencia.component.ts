@@ -30,15 +30,41 @@ export class CreatePermanenciaComponent implements OnInit {
 
   async carregarCodigosClienteVeiculo() {
     try {
-      const clienteVeiculo =
-        await this.clienteVeiculoService.getClientesVeiculos();
-      this.codigosClientesVeiculos = clienteVeiculo.map(
-        (cv: any) => cv.codigoClienteVeiculo
-      );
+      const clienteVeiculos = await this.clienteVeiculoService.getClientesVeiculos();
+
+      if (clienteVeiculos) {
+        this.codigosClientesVeiculos = await Promise.all(
+          clienteVeiculos.map(async (cv: any) => {
+            try {
+              const clienteResponse = await this.clienteVeiculoService.getDetalhesCliente(cv.clienteId);
+              const veiculoResponse = await this.clienteVeiculoService.getDetalhesVeiculo(cv.veiculoId);
+
+              return {
+                clienteVeiculoId: cv.codigoClienteVeiculo,
+                nomeCliente: clienteResponse.data.nome,
+                marcaVeiculo: veiculoResponse.data.marca,
+              };
+            } catch (innerError) {
+              console.error(
+                `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
+                innerError
+              );
+              return {
+                clienteVeiculoId: cv.codigoClienteVeiculo,
+                nomeCliente: 'Nome não disponível',
+                marcaVeiculo: 'Marca não disponível',
+              };
+            }
+          })
+        );
+      } else {
+        console.error('A resposta do serviço de clientes e veículos é indefinida.');
+      }
     } catch (error) {
       console.error('Erro ao carregar códigos de Cliente e Veículo:', error);
     }
   }
+
 
   cadastrarPermanencia() {
     try {

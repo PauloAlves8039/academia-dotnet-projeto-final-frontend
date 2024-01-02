@@ -3,6 +3,7 @@ import { PermanenciaService } from '../../../services/permanencia/permanencia.se
 import { Router } from '@angular/router';
 import { Permanencia } from '../../../models/permanencia/Permanencia';
 import jsPDF from 'jspdf';
+import { ClienteVeiculoService } from '../../../services/clienteVeiculo/clienteVeiculo.service';
 
 @Component({
   selector: 'app-list-permanencias',
@@ -13,6 +14,7 @@ export class ListPermanenciasComponent implements OnInit {
   permanencia: Permanencia = new Permanencia();
   permanencias!: any[];
   clientesVeiculos!: any[];
+  codigosClientesVeiculos: any[] = [];
   permanenciasFiltradas: any[] = [];
   termoDePesquisaPermanencia: string = '';
   itensPorPagina: number = 5;
@@ -21,11 +23,13 @@ export class ListPermanenciasComponent implements OnInit {
 
   constructor(
     private permanenciaService: PermanenciaService,
+    private clienteVeiculoService: ClienteVeiculoService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.getAllPermanencias();
+    this.carregarCodigosClienteVeiculo();
   }
 
   trocarPagina(pagina: number) {
@@ -43,6 +47,58 @@ export class ListPermanenciasComponent implements OnInit {
       this.pesquisarPermanencias();
     });
   }
+
+  async carregarCodigosClienteVeiculo() {
+    try {
+      const clienteVeiculos = await this.clienteVeiculoService.getClientesVeiculos();
+
+      if (clienteVeiculos) {
+        this.codigosClientesVeiculos = await Promise.all(
+          clienteVeiculos.map(async (cv: any) => {
+            try {
+              const clienteResponse = await this.clienteVeiculoService.getDetalhesCliente(cv.clienteId);
+              const veiculoResponse = await this.clienteVeiculoService.getDetalhesVeiculo(cv.veiculoId);
+
+              return {
+                clienteVeiculoId: cv.codigoClienteVeiculo,
+                nomeCliente: clienteResponse.data.nome,
+                marcaVeiculo: veiculoResponse.data.marca,
+              };
+            } catch (innerError) {
+              console.error(
+                `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
+                innerError
+              );
+              return {
+                clienteVeiculoId: cv.codigoClienteVeiculo,
+                nomeCliente: 'Nome não disponível',
+                marcaVeiculo: 'Marca não disponível',
+              };
+            }
+          })
+        );
+      } else {
+        console.error('A resposta do serviço de clientes e veículos é indefinida.');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar códigos de Cliente e Veículo:', error);
+    }
+  }
+
+  encontrarNomeCliente(clienteVeiculoId: number): string {
+    const clienteVeiculo = this.codigosClientesVeiculos.find(
+      (cv) => cv.clienteVeiculoId === clienteVeiculoId
+    );
+    return clienteVeiculo ? clienteVeiculo.nomeCliente : 'Nome não disponível';
+  }
+
+  encontrarMarcaVeiculo(clienteVeiculoId: number): string {
+    const clienteVeiculo = this.codigosClientesVeiculos.find(
+      (cv) => cv.clienteVeiculoId === clienteVeiculoId
+    );
+    return clienteVeiculo ? clienteVeiculo.marcaVeiculo : 'Marca não disponível';
+  }
+
 
   async atualizarPermanencia(dadosAtualizados: any) {
     try {
