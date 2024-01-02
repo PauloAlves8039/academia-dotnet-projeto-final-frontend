@@ -40,14 +40,14 @@
       <thead class="table-dark">
         <tr>
           <th scope="col">Cliente</th>
-          <th scope="col">Veículo</th>
+          <th scope="col">Marca e Modelo</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let clienteVeiculo of clientesVeiculosFiltrados">
           <td>{{ encontrarNomeDoCliente(clienteVeiculo.clienteId) }}</td>
-          <td>{{ encontrarMarcaDoVeiculo(clienteVeiculo.veiculoId) }}</td>
+          <td>{{ encontrarMarcaDoVeiculo(clienteVeiculo.veiculoId) }} - {{ encontrarModeloDoVeiculo(clienteVeiculo.veiculoId) }}</td>
           <td>
             <button type="button"
                     class="btn button-warning button-border btn-sm btn-sm me-1"

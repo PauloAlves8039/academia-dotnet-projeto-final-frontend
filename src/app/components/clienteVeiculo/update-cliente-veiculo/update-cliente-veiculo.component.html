@@ -34,7 +34,7 @@
                   [(ngModel)]="clienteVeiculoExistente.veiculoId"
                   required>
             <option *ngFor="let veiculo of veiculosExistentes" [value]="veiculo.codigoVeiculo">
-              {{ veiculo.marca }}
+              {{ veiculo.marca }} - {{ veiculo.modelo }}
             </option>
           </select>
         </div>

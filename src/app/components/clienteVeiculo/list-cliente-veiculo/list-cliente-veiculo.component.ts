@@ -114,4 +114,9 @@ export class ListClienteVeiculoComponent implements OnInit {
     const veiculo = this.veiculos.find((v) => v.codigoVeiculo === veiculoId);
     return veiculo ? veiculo.marca : 'Veículo não encontrado';
   }
+
+  encontrarModeloDoVeiculo(veiculoId: number): string {
+    const veiculo = this.veiculos.find((v) => v.codigoVeiculo === veiculoId);
+    return veiculo ? veiculo.modelo : 'Veículo não encontrado';
+  }
 }
