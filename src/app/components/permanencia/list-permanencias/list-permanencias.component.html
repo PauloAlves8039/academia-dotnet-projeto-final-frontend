@@ -64,22 +64,22 @@
 
           <td>
             <button type="button"
-                    class="btn button-warning button-border btn-sm btn-sm me-1"
+                    class="btn button-success button-border btn-sm btn-sm me-1"
                     (click)="atualizarPermanencia(permanencia)"
                     title="Editar" >
-              <i class="bi bi-pencil-square">Editar</i>
+              <i class="bi bi-check-square-fill"> Concluir</i>
             </button>
             <button type="button"
                     class="btn button-info button-border btn-sm btn-sm me-1"
                     (click)="gerarPDF(permanencia)"
                     title="Gerar PDF" >
-              <i class="bi bi-file-pdf-fill">PDF</i>
+              <i class="bi bi-file-pdf-fill"> Ticket</i>
             </button>
             <button type="button"
                     class="btn button-danger button-border btn-sm"
                     (click)="excluirPermanencia(permanencia.codigoPermanencia)"
                     title="Excluir">
-              <i class="bi bi-trash-fill">Excluir</i>
+              <i class="bi bi-trash-fill"> Excluir</i>
             </button>
           </td>
         </tr>
