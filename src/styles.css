@@ -10,6 +10,7 @@
   --warning-color: #FFB90F;
   --neutral-color: #FFFFFF;
   --neutral-color2: #9C9C9C;
+  --background-transparent: rgba(0, 0, 0, 0.5);
 }
 
 .page-title {

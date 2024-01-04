@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  styleUrls: ['./spinner.component.css'],
 })
 export class SpinnerComponent implements OnInit {
   exibirSpinner: boolean = true;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.executarSpinner();
@@ -19,5 +19,4 @@ export class SpinnerComponent implements OnInit {
       this.exibirSpinner = false;
     }, 500);
   }
-
 }
