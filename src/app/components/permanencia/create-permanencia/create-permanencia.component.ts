@@ -3,6 +3,7 @@ import { PermanenciaService } from '../../../services/permanencia/permanencia.se
 import { ClienteVeiculoService } from '../../../services/clienteVeiculo/clienteVeiculo.service';
 import { Permanencia } from '../../../models/permanencia/Permanencia';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-permanencia',
@@ -17,7 +18,8 @@ export class CreatePermanenciaComponent implements OnInit {
   constructor(
     private permanenciaService: PermanenciaService,
     private clienteVeiculoService: ClienteVeiculoService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -44,11 +46,8 @@ export class CreatePermanenciaComponent implements OnInit {
                 nomeCliente: clienteResponse.data.nome,
                 marcaVeiculo: veiculoResponse.data.marca,
               };
-            } catch (innerError) {
-              console.error(
-                `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
-                innerError
-              );
+            } catch (error) {
+              this.alertService.mostrarAlerta(`Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: ${error}`, false);
               return {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: 'Nome não disponível',
@@ -58,10 +57,10 @@ export class CreatePermanenciaComponent implements OnInit {
           })
         );
       } else {
-        console.error('A resposta do serviço de clientes e veículos é indefinida.');
+        this.alertService.mostrarAlerta('A resposta do serviço de Clientes e Ceículos é indefinida.', false);
       }
     } catch (error) {
-      console.error('Erro ao carregar códigos de Cliente e Veículo:', error);
+      this.alertService.mostrarAlerta(`Erro ao carregar e Cliente e Veículo: ${error}`, false);
     }
   }
 
@@ -76,17 +75,17 @@ export class CreatePermanenciaComponent implements OnInit {
         this.permanenciaService
           .addPermanencia(this.permanenciaData)
           .then((result) => {
-            alert('Permanência cadastrada com sucesso!');
+            this.alertService.mostrarAlerta('Permanência cadastrada com sucesso!');
             this.limparCamposPermanencia();
           })
           .catch((error) => {
-            console.error('Erro ao cadastrar permanência:', error);
+            this.alertService.mostrarAlerta(`Erro ao cadastrar Permanência: ${error}`, false);
           });
       } else {
-        console.error('Por favor, preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta(`Por favor, preencha todos os campos obrigatórios.`, false);
       }
-    } catch (erro) {
-      alert('Erro ao cadastrar de permanência: ' + erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao cadastrar Permanência: ${error}`, false);
     }
   }
 
@@ -114,7 +113,7 @@ export class CreatePermanenciaComponent implements OnInit {
 
       return `${year}-${month}-${day}T${hours}:${minutes}`;
     } else {
-      console.error('O valor de data não é do tipo Date ou string:', data);
+      this.alertService.mostrarAlerta(`O valor de data não é do tipo Date ou string: ${data}`, false);
       return '';
     }
   }

@@ -4,6 +4,14 @@
 
 <hr>
 
+<div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+  'alert-success': alertService.obterResultadoSucesso(),
+  'alert-danger': !alertService.obterResultadoSucesso(),
+  'alert': true
+}" role="alert">
+  {{ alertService.obterMensagem() }}
+</div>
+
 <div class="permanencia-form">
   <form (submit)="cadastrarPermanencia()">
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VeiculoService } from '../../../services/veiculo/veiculo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Veiculo } from '../../../models/veiculo/Veiculo';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-update-veiculo',
@@ -14,7 +15,8 @@ export class UpdateVeiculoComponent implements OnInit {
   constructor(
     private veiculoService: VeiculoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -38,14 +40,15 @@ export class UpdateVeiculoComponent implements OnInit {
   async atualizarVeiculo() {
     try {
       if (this.validarCamposObrigatorios()) {
-        const resposta = await this.veiculoService.updateVeiculo(this.veiculoExistente);
-        alert('Veículo atualizado com sucesso: ' + resposta);
+        await this.veiculoService.updateVeiculo(this.veiculoExistente);
+
+        this.alertService.mostrarAlerta('Veículo atualizado com sucesso!');
         this.limparCamposVeiculo();
       } else {
-        alert('Preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
-    } catch (erro) {
-      alert('Erro ao atualizar veículo: ' + erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao atualizar Veículo: ${error}`, false);
     }
   }
 

@@ -4,6 +4,7 @@ import { ClienteService } from '../../../services/cliente/cliente.service';
 import { Cliente } from '../../../models/cliente/Cliente';
 import { EnderecoService } from '../../../services/endereco/endereco.service';
 import { Endereco } from '../../../models/endereco/Endereco';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-update-cliente',
@@ -18,7 +19,9 @@ export class UpdateClienteComponent implements OnInit {
     private clienteService: ClienteService,
     private enderecoService: EnderecoService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public alertService: AlertService,
+    ) { }
 
   ngOnInit() {
     this.carregarClienteDaRota();
@@ -40,7 +43,7 @@ export class UpdateClienteComponent implements OnInit {
       }
 
     } else {
-      alert('Código do cliente não fornecido na rota.');
+      this.alertService.mostrarAlerta(`Código do cliente não fornecido na rota.`, false);
     }
   }
 
@@ -51,15 +54,15 @@ export class UpdateClienteComponent implements OnInit {
           this.formatarData(this.clienteExistente.dataNascimento)
         );
 
-        const resposta = await this.clienteService.updateCliente(this.clienteExistente);
+        await this.clienteService.updateCliente(this.clienteExistente);
 
-        alert('Cliente atualizado com sucesso: ' + resposta);
+        this.alertService.mostrarAlerta('Cliente atualizado com sucesso!');
         this.limparCamposCliente();
       } else {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
     } catch (erro) {
-      alert('Erro ao atualizar cliente: ' + erro);
+      this.alertService.mostrarAlerta(`Erro ao cadastrar cliente: ${erro}`, false);
     }
   }
 
@@ -81,8 +84,8 @@ export class UpdateClienteComponent implements OnInit {
   private async carregarEnderecos() {
     try {
       this.enderecos = await this.enderecoService.getEnderecos();
-    } catch (erro) {
-      console.error('Erro ao carregar endereços: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar endereços: ${error}`, false);
     }
   }
 
@@ -99,7 +102,7 @@ export class UpdateClienteComponent implements OnInit {
 
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     } else {
-      console.error('O valor de data não é do tipo Date ou string:', data);
+      this.alertService.mostrarAlerta(`O valor de data não é do tipo Date ou string: ${data}`, false);
       return '';
     }
   }

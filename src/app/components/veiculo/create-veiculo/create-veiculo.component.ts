@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Veiculo } from '../../../models/veiculo/Veiculo';
 import { VeiculoService } from '../../../services/veiculo/veiculo.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-veiculo',
@@ -13,22 +14,23 @@ export class CreateVeiculoComponent implements OnInit {
 
   constructor(
     private veiculoService: VeiculoService,
-    private router: Router) {}
+    private router: Router,
+    public alertService: AlertService,) {}
 
   ngOnInit() {}
 
   async cadastrarVeiculo() {
     try {
       if (this.validarCamposObrigatorios()) {
-        const resposta = await this.veiculoService.addVeiculo(this.novoVeiculo);
+        await this.veiculoService.addVeiculo(this.novoVeiculo);
 
-        alert('Veículo cadastrado com sucesso: ' + resposta);
+        this.alertService.mostrarAlerta('Veículo cadastrado com sucesso!');
         this.limparCamposVeiculo();
       } else {
-        alert('Preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
-    } catch (erro) {
-      alert('Erro ao cadastrar veículo: ' + erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao cadastrar Veículo: ${error}`, false);
     }
   }
 

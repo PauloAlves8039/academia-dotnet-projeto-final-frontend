@@ -2,6 +2,16 @@
 
   <h2 class="page-title">Atualizar Endereço</h2>
 
+  <hr>
+
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+        'alert-success': alertService.obterResultadoSucesso(),
+        'alert-danger': !alertService.obterResultadoSucesso(),
+        'alert': true
+      }" role="alert">
+    {{ alertService.obterMensagem() }}
+  </div>
+
   <div class="row mb-3 form-content">
     <div class="col-md-2 d-flex align-items-end">
       <label for="cep-buscado" class="form-label me-2">CEP</label>
@@ -16,7 +26,7 @@
     </div>
 
     <div class="col-md-4 d-flex align-items-end">
-      <button type="button" class="btn button-info button-form" (click)="atualizarPesquisarCep()" title="Pesquisar CEP">
+      <button type="button" class="btn button-info button-form" (click)="atualizarPesquisaCep()" title="Pesquisar CEP">
         <i class="bi bi-search"></i> Pesquisar CEP
       </button>
 

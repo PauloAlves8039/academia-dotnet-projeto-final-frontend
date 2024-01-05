@@ -4,6 +4,14 @@
 
   <hr>
 
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+    'alert-success': alertService.obterResultadoSucesso(),
+    'alert-danger': !alertService.obterResultadoSucesso(),
+    'alert': true
+  }" role="alert">
+    {{ alertService.obterMensagem() }}
+  </div>
+
   <form (ngSubmit)="atualizarCliente()" #enderecoForm="ngForm">
 
     <div class="row">
@@ -82,7 +90,7 @@
     <hr>
 
     <div class="mt-2">
-      <button type="submit" class="btn button-success button-form" [disabled]="!validarCamposObrigatorios()" title="Salvar">
+      <button type="submit" class="btn button-success button-form" title="Salvar">
         <i class="bi bi-floppy"></i> Salvar
       </button>
       <button type="button" class="btn button-cancel button-form ms-2" (click)="limparCamposCliente()" title="Cancelar">

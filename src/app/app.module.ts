@@ -1,3 +1,4 @@
+import { AlertService } from './services/alert/alert.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -63,7 +64,7 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,16 @@
 
   <h2 class="page-title">Cadastrar Endereço</h2>
 
+  <hr>
+
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+      'alert-success': alertService.obterResultadoSucesso(),
+      'alert-danger': !alertService.obterResultadoSucesso(),
+      'alert': true
+    }" role="alert">
+    {{ alertService.obterMensagem() }}
+  </div>
+
   <div class="row mb-3 form-content">
     <div class="col-md-2 d-flex align-items-end">
       <label for="cep-pesquisado" class="form-label me-2">CEP</label>
@@ -40,6 +50,7 @@
                  id="logradouro"
                  name="logradouro"
                  [(ngModel)]="novoEndereco.logradouro"
+                 minlength="3"
                  required>
         </div>
 
@@ -50,6 +61,7 @@
                  id="numero"
                  name="numero"
                  [(ngModel)]="novoEndereco.numero"
+                 minlength="1"
                  required>
         </div>
 
@@ -69,6 +81,7 @@
                  id="bairro"
                  name="bairro"
                  [(ngModel)]="novoEndereco.bairro"
+                 minlength="3"
                  required>
         </div>
 
@@ -83,6 +96,7 @@
                  id="cidade"
                  name="cidade"
                  [(ngModel)]="novoEndereco.cidade"
+                 minlength="5"
                  required>
         </div>
 
@@ -93,6 +107,7 @@
                  id="estado"
                  name="estado"
                  [(ngModel)]="novoEndereco.estado"
+                 minlength="2"
                  required>
         </div>
 
@@ -103,6 +118,7 @@
                  id="cep"
                  name="cep"
                  [(ngModel)]="novoEndereco.cep"
+                 minlength="9"
                  required>
         </div>
 

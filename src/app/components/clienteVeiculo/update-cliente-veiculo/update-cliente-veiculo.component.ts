@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteVeiculo } from '../../../models/clienteVeiculo/ClienteVeiculo';
 import { Cliente } from '../../../models/cliente/Cliente';
 import { Veiculo } from '../../../models/veiculo/Veiculo';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-update-cliente-veiculo',
@@ -22,7 +23,8 @@ export class UpdateClienteVeiculoComponent implements OnInit {
     private clienteService: ClienteService,
     private veiculoService: VeiculoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -34,14 +36,16 @@ export class UpdateClienteVeiculoComponent implements OnInit {
   async atualizarClienteVeiculo() {
     try {
       if (this.validarCamposObrigatorios()) {
-        const resposta = await this.clienteVeiculoService.updateClienteVeiculo(this.clienteVeiculoExistente);
-        alert('Associação entre cliente e veículo atualizada com sucesso: ' + resposta);
+
+        await this.clienteVeiculoService.updateClienteVeiculo(this.clienteVeiculoExistente);
+
+        this.alertService.mostrarAlerta('Associação entre cliente e veículo atualizada com sucesso!');
         this.limparCamposClienteVeiculo();
       } else {
-        alert('Preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
     } catch (erro) {
-      alert('Erro ao atualziar associação entre cliente e veículo: ' + erro);
+    this.alertService.mostrarAlerta(`Erro ao atualziar associação entre cliente e veículo: ${erro}`, false);
     }
   }
 
@@ -51,7 +55,7 @@ export class UpdateClienteVeiculoComponent implements OnInit {
     if (codigoClienteVeiculo) {
       this.clienteVeiculoExistente = await this.clienteVeiculoService.getClienteVeiculoPorCodigo(codigoClienteVeiculo);
     } else {
-      console.warn('Código da associação cliente e veículo não fornecido na rota.');
+      this.alertService.mostrarAlerta('Código da associação cliente e veículo não fornecido na rota.', false);
     }
   }
 
@@ -73,16 +77,16 @@ export class UpdateClienteVeiculoComponent implements OnInit {
   private async carregarClientesExistentes() {
     try {
       this.clientesExistentes = await this.clienteService.getClientes();
-    } catch (erro) {
-      console.error('Erro ao carregar clientes: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar Clientes: ${error}`, false);
     }
   }
 
   private async carregarVeiculosExistentes() {
     try {
       this.veiculosExistentes = await this.veiculoService.getVeiculos();
-    } catch (erro) {
-      console.error('Erro ao carregar veículos: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar Veículos: ${error}`, false);
     }
   }
 

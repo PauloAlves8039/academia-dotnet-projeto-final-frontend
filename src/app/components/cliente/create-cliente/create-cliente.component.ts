@@ -4,6 +4,7 @@ import { Endereco } from '../../../models/endereco/Endereco';
 import { ClienteService } from '../../../services/cliente/cliente.service';
 import { EnderecoService } from '../../../services/endereco/endereco.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-cliente',
@@ -17,7 +18,8 @@ export class CreateClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private enderecoService: EnderecoService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -31,27 +33,25 @@ export class CreateClienteComponent implements OnInit {
   async cadastrarCliente() {
     try {
       if (this.validarCamposObrigatorios()) {
-        this.cliente.dataNascimento = new Date(
-          this.formatarData(this.cliente.dataNascimento)
-        );
+        this.cliente.dataNascimento = new Date(this.formatarData(this.cliente.dataNascimento));
 
-        const resposta = await this.clienteService.addCliente(this.cliente);
+        await this.clienteService.addCliente(this.cliente);
 
-        alert('Cliente cadastrado com sucesso: ' + resposta);
+        this.alertService.mostrarAlerta('Cliente cadastrado com sucesso!');
         this.limparCamposCliente();
       } else {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
     } catch (erro) {
-      alert('Erro ao cadastrar cliente: ' + erro);
+      this.alertService.mostrarAlerta(`Erro ao cadastrar Cliente: ${erro}`, false);
     }
   }
 
   private async carregarEnderecos() {
     try {
       this.enderecos = await this.enderecoService.getEnderecos();
-    } catch (erro) {
-      console.error('Erro ao carregar endereços: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar endereços: ${error}`, false);
     }
   }
 
@@ -68,7 +68,7 @@ export class CreateClienteComponent implements OnInit {
 
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     } else {
-      console.error('O valor de data não é do tipo Date ou string:', data);
+      this.alertService.mostrarAlerta(`O valor de data não é do tipo Date ou string: ${data}`, false);
       return '';
     }
   }

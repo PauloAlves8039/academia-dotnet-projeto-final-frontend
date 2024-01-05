@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Permanencia } from '../../../models/permanencia/Permanencia';
 import jsPDF from 'jspdf';
 import { ClienteVeiculoService } from '../../../services/clienteVeiculo/clienteVeiculo.service';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-list-permanencias',
@@ -24,7 +25,8 @@ export class ListPermanenciasComponent implements OnInit {
   constructor(
     private permanenciaService: PermanenciaService,
     private clienteVeiculoService: ClienteVeiculoService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -64,11 +66,8 @@ export class ListPermanenciasComponent implements OnInit {
                 nomeCliente: clienteResponse.data.nome,
                 marcaVeiculo: veiculoResponse.data.marca,
               };
-            } catch (innerError) {
-              console.error(
-                `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
-                innerError
-              );
+            } catch (error) {
+              this.alertService.mostrarAlerta(`Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: ${error}`, false);
               return {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: 'Nome não disponível',
@@ -78,10 +77,10 @@ export class ListPermanenciasComponent implements OnInit {
           })
         );
       } else {
-        console.error('A resposta do serviço de clientes e veículos é indefinida.');
+        this.alertService.mostrarAlerta('A resposta do serviço de Clientes e Ceículos é indefinida.', false);
       }
     } catch (error) {
-      console.error('Erro ao carregar códigos de Cliente e Veículo:', error);
+      this.alertService.mostrarAlerta(`Erro ao carregar Clientes e Veículos: ${error}`, false);
     }
   }
 
@@ -102,14 +101,12 @@ export class ListPermanenciasComponent implements OnInit {
 
   async atualizarPermanencia(dadosAtualizados: any) {
     try {
-      const resposta = await this.permanenciaService.updatePermanencia(
-        dadosAtualizados
-      );
-      alert('Cliente atualizado com sucesso: ' + resposta);
+      await this.permanenciaService.updatePermanencia(dadosAtualizados);
+      this.alertService.mostrarAlerta('Permanência concluída com sucesso!');
 
       this.getAllPermanencias();
     } catch (error) {
-      console.error('Erro ao atualizar permanência: ', error);
+      this.alertService.mostrarAlerta(`Erro ao concluir Permanência: ${error}`, false);
     }
   }
 
@@ -139,13 +136,11 @@ export class ListPermanenciasComponent implements OnInit {
 
     if (confirmacao) {
       try {
-        const resposta = await this.permanenciaService.deletePermanencia(
-          codigoPermanencia
-        );
-        alert('Permanência excluída com sucesso:' + resposta);
+        await this.permanenciaService.deletePermanencia(codigoPermanencia);
+        this.alertService.mostrarAlerta('Permanência excluída com sucesso!');
         this.getAllPermanencias();
-      } catch (erro) {
-        console.error('Erro ao excluir permanência:', erro);
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao excluir Permanência: ${error}`, false);
       }
     }
   }
@@ -162,9 +157,7 @@ export class ListPermanenciasComponent implements OnInit {
     const dataEntradaString = this.formatarDataPdf(permanencia.dataEntrada);
     const dataSaidaString = this.formatarDataPdf(permanencia.dataSaida);
     const taxaPorHoraString = permanencia.taxaPorHora.toString();
-    const valorTotalString = permanencia.valorTotal
-      ? permanencia.valorTotal.toString()
-      : '';
+    const valorTotalString = permanencia.valorTotal ? permanencia.valorTotal.toString() : '';
 
     doc.text('Código Cliente Veículo: ' + clienteVeiculoIdString, 10, 10);
     doc.text('Placa do Veículo: ' + permanencia.placa, 10, 20);
@@ -191,7 +184,7 @@ export class ListPermanenciasComponent implements OnInit {
 
       return `${year}-${month}-${day}T${hours}:${minutes}`;
     } else {
-      console.error('O valor de data não é do tipo Date ou string:', data);
+      this.alertService.mostrarAlerta(`O valor de data não é do tipo Date ou string: ${data}`, false);
       return '';
     }
   }

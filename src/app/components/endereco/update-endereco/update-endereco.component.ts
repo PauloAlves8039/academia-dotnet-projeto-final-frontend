@@ -4,6 +4,7 @@ import { Endereco } from '../../../models/endereco/Endereco';
 import { ConsultarCepService } from '../../../services/consultarCep/consultarCep.service';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-update-endereco',
@@ -19,7 +20,9 @@ export class UpdateEnderecoComponent implements OnInit {
     private enderecoService: EnderecoService,
     private consultaCepService: ConsultarCepService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public alertService: AlertService,
+    ) { }
 
   ngOnInit() {
     this.carregarEnderecoPelaRota();
@@ -32,25 +35,27 @@ export class UpdateEnderecoComponent implements OnInit {
       this.enderecoExistente = await this.enderecoService.getEnderecoPorCodigo(codigoEndereco);
     } else {
       console.warn('Código do endereço não fornecido na rota.');
+      this.alertService.mostrarAlerta('Código do endereço não fornecido na rota.', false);
     }
   }
 
   async atualizarEndereco() {
     try {
       if (this.validarCamposObrigatorios()) {
-        await this.atualizarPesquisarCep();
-        const resposta = await this.enderecoService.updateEndereco(this.enderecoExistente);
-        alert('Endereço atualizado com sucesso: ' + resposta);
+        await this.atualizarPesquisaCep();
+        await this.enderecoService.updateEndereco(this.enderecoExistente);
+
+        this.alertService.mostrarAlerta('Endereço atualizado com sucesso!');
         this.limparCamposEndereco();
       } else {
-        alert('Preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
     } catch (erro) {
-      alert('Erro ao atualizar endereço: ' + erro);
+      this.alertService.mostrarAlerta(`Erro ao atualizar Endereço: ${erro}`, false);
     }
   }
 
-  async atualizarPesquisarCep() {
+  async atualizarPesquisaCep() {
     try {
       if (this.validarDigitosCep(this.novoCep)) {
         const cepData = await this.consultaCepService.consultarCep(this.novoCep).toPromise();
@@ -61,8 +66,8 @@ export class UpdateEnderecoComponent implements OnInit {
         this.enderecoExistente.estado = cepData.uf;
         this.enderecoExistente.cep = cepData.cep;
       }
-    } catch (erro) {
-      console.error('Erro ao consultar CEP:', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao consultar CEP: ${error}`, false);
     }
   }
 
@@ -81,12 +86,12 @@ export class UpdateEnderecoComponent implements OnInit {
 
   validarDigitosCep(cep: string): boolean {
     if (!cep) {
-      alert('O campo CEP não pode estar vazio.');
+      this.alertService.mostrarAlerta(`O campo CEP não pode estar vazio.`, false);
       return false;
     }
 
     if (cep.length !== 8) {
-      alert('O campo CEP deve ter exatamente 8 dígitos.');
+      this.alertService.mostrarAlerta(`O campo CEP deve ter exatamente 8 dígitos.`, false);
       return false;
     }
 

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Endereco } from '../../../models/endereco/Endereco';
 import { EnderecoService } from '../../../services/endereco/endereco.service';
 import { ConsultarCepService } from '../../../services/consultarCep/consultarCep.service';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-endereco',
@@ -18,7 +19,8 @@ export class CreateEnderecoComponent implements OnInit {
   constructor(
     private enderecoService: EnderecoService,
     private consultaCepService: ConsultarCepService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {}
@@ -26,15 +28,15 @@ export class CreateEnderecoComponent implements OnInit {
   async cadastrarEndereco() {
     try {
       if (this.validarCamposObrigatorios()) {
-        const resposta = await this.enderecoService.addEndereco(this.novoEndereco);
+        await this.enderecoService.addEndereco(this.novoEndereco);
 
-        alert('Endereço cadastrado com sucesso: ' + resposta);
+        this.alertService.mostrarAlerta('Endereço cadastrado com sucesso!');
         this.limparCamposEndereco();
       } else {
-        alert('Preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
-    } catch (erro) {
-      alert('Erro ao cadastrar endereço: ' + erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao cadastrar Endereço: ${error}`, false);
     }
   }
 
@@ -49,8 +51,8 @@ export class CreateEnderecoComponent implements OnInit {
         this.novoEndereco.estado = cepData.uf;
         this.novoEndereco.cep = cepData.cep;
       }
-    } catch (erro) {
-      console.error('Erro ao consultar CEP:', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao consultar CEP: ${error}`, false);
     }
   }
 
@@ -69,12 +71,13 @@ export class CreateEnderecoComponent implements OnInit {
 
   validarDigitosCep(cep: string): boolean {
     if (!cep) {
-      alert('O campo CEP não pode estar vazio.');
+      this.alertService.mostrarAlerta(`O campo CEP não pode estar vazio.`, false);
       return false;
     }
 
     if (cep.length !== 8) {
       alert('O campo CEP deve ter exatamente 8 dígitos.');
+      this.alertService.mostrarAlerta(`O campo CEP deve ter exatamente 8 dígitos.`, false);
       return false;
     }
 

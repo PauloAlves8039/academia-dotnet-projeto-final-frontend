@@ -6,6 +6,7 @@ import { Cliente } from '../../../models/cliente/Cliente';
 import { Veiculo } from '../../../models/veiculo/Veiculo';
 import { ClienteVeiculo } from '../../../models/clienteVeiculo/ClienteVeiculo';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-cliente-veiculo',
@@ -21,7 +22,8 @@ export class CreateClienteVeiculoComponent implements OnInit {
     private clienteVeiculoService: ClienteVeiculoService,
     private clienteService: ClienteService,
     private veiculoService: VeiculoService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -37,15 +39,15 @@ export class CreateClienteVeiculoComponent implements OnInit {
     try {
       if (this.validarCamposObrigatorios()) {
 
-        const resposta = await this.clienteVeiculoService.addClienteVeiculo(this.clienteVeiculo);
+        await this.clienteVeiculoService.addClienteVeiculo(this.clienteVeiculo);
 
-        alert('Cliente e Veículo vinculados com sucesso: ' + resposta);
+        this.alertService.mostrarAlerta('Cliente e Veículo associados com sucesso!');
         this.limparCamposClienteVeiculo();
       } else {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        this.alertService.mostrarAlerta('Por favor, preencha todos os campos obrigatórios.', false);
       }
-    } catch (erro) {
-      alert('Erro ao vincular Cliente e Veículo: ' + erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao associar Cliente e Veículo: ${error}`, false);
     }
   }
 
@@ -63,16 +65,16 @@ export class CreateClienteVeiculoComponent implements OnInit {
   private async carregarClientes() {
     try {
       this.clientes = await this.clienteService.getClientes();
-    } catch (erro) {
-      console.error('Erro ao carregar clientes: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar Clientes: ${error}`, false);
     }
   }
 
   private async carregarVeiculos() {
     try {
       this.veiculos = await this.veiculoService.getVeiculos();
-    } catch (erro) {
-      console.error('Erro ao carregar veículos: ', erro);
+    } catch (error) {
+      this.alertService.mostrarAlerta(`Erro ao carregar Veículos: ${error}`, false);
     }
   }
 
