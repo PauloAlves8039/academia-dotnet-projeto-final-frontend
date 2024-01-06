@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Usuario } from '../../../models/usuario/Usuario';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -29,8 +31,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         })
         .catch(error => {
-          console.error('Erro no login:', error);
+          this.alertService.mostrarAlerta(`Erro ao logar! Verifique as suas credencias - ${error}`, false);
         });
     }
+  }
+
+  limparCampos() {
+    this.usuario = new Usuario('', '');
+    this.formEnviado = false;
+    window.location.reload();
   }
 }

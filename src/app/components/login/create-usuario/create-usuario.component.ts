@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Usuario } from '../../../models/usuario/Usuario';
 import { RegistrarUsuario } from '../../../models/registrarUsuario/RegistrarUsuario';
+import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-create-usuario',
@@ -13,7 +14,11 @@ export class CreateUsuarioComponent implements OnInit {
   mensagem: string = '';
   formEnviado: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public alertService: AlertService,
+  ) {}
 
   ngOnInit() {}
 
@@ -27,12 +32,29 @@ export class CreateUsuarioComponent implements OnInit {
     ) {
       this.authService.register(this.registrarUsuario)
         .then(() => {
-          this.mensagem = 'Cadastro realizado com sucesso!';
+          this.alertService.mostrarAlerta('Cadastro realizado com sucesso!');
+          setTimeout(() => {
+            this.limparCamposAposCadastro();
+          }, 1000);
         })
         .catch(error => {
-          console.error('Erro no registro:', error);
-          this.mensagem = 'Erro ao cadastrar usuário. Verifique os detalhes e tente novamente.';
+          this.alertService.mostrarAlerta(`Erro ao cadastrar usuário. Verifique os detalhes e tente novamente: ${error}`, false);
         });
     }
+  }
+
+  voltarParaTelaDeLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  limparCamposAposCadastro() {
+    this.registrarUsuario = { email: '', password: '', confirmPassword: '' };
+    this.formEnviado = false;
+  }
+
+  limparCampos() {
+    this.registrarUsuario = { email: '', password: '', confirmPassword: '' };
+    this.formEnviado = false;
+    window.location.reload();
   }
 }

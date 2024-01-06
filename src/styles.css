@@ -125,3 +125,7 @@
   background-color: var(--neutral-color2);
   color: var(--neutral-color);
 }
+
+.button-login {
+  width: 325px;
+}

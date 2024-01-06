@@ -1,6 +1,20 @@
+<div class="mb-2">
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+    'alert-success': alertService.obterResultadoSucesso(),
+    'alert-danger': !alertService.obterResultadoSucesso(),
+    'alert': true
+  }" role="alert">
+    {{ alertService.obterMensagem() }}
+  </div>
+</div>
+
 <div class="usuario-container row">
   <div class="col-md-4 usuario-container-form">
-    <h2 class="title-login">Criar Usuário</h2>
+
+    <h2 class="title-login">
+      <i class="bi bi-person-fill-add"></i> Criar Usuário
+    </h2>
+
     <form (submit)="registrarNovoUsuario()">
       <div class="mb-4">
         <label for="email">Email:</label>
@@ -37,13 +51,21 @@
       </div>
 
       <div class="col-md-12">
-        <button type="submit" class="btn button-success button-border button-form-2">
+        <button type="submit" class="btn button-success button-border button-login d-block mb-3">
           <i class="bi bi-floppy-fill"></i> Registrar
+        </button>
+        <button type="submit" class="btn button-cancel button-border button-login d-block mb-3" (click)="limparCampos()">
+          <i class="bi bi-x-circle-fill"></i> Cancelar
+        </button>
+        <button type="button" class="btn button-info button-border button-login d-block" (click)="voltarParaTelaDeLogin()">
+          <i class="bi bi-arrow-left"></i> Voltar para o Login
         </button>
       </div>
 
     </form>
-    <div *ngIf="mensagem">{{ mensagem }}</div>
+
+    <!-- <div *ngIf="mensagem">{{ mensagem }}</div> -->
+
   </div>
 </div>
 
