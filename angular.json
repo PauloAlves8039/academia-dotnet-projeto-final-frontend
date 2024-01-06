@@ -70,7 +70,8 @@
               "buildTarget": "EstacionamentoMotos:build:production"
             },
             "development": {
-              "buildTarget": "EstacionamentoMotos:build:development"
+              "buildTarget": "EstacionamentoMotos:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
