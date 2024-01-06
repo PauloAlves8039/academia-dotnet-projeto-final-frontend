@@ -6,12 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
-        <a class="nav-link" [routerLink]="['/enderecos']" routerLinkActive="active">Endereços</a>
-        <a class="nav-link" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
-        <a class="nav-link" [routerLink]="['/veiculos']" routerLinkActive="active">Veículos</a>
-        <a class="nav-link" [routerLink]="['/clientes-veiculos']" routerLinkActive="active">Associados</a>
-        <a class="nav-link" [routerLink]="['/permanencias']" routerLinkActive="active">Permanências</a>
+        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/enderecos']" routerLinkActive="active">Endereços</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/veiculos']" routerLinkActive="active">Veículos</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes-veiculos']" routerLinkActive="active">Associados</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/permanencias']" routerLinkActive="active">Permanências</a>
+        <a *ngIf="verificarAutenticacao()" class="nav-link" (click)="executarLogout()">Sair</a>
       </div>
     </div>
   </div>

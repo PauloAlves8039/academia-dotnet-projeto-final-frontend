@@ -1,0 +1,13 @@
+.usuario-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.usuario-container-form {
+  border: 1px solid var(--dark-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--dark-color);
+  width: 450px;
+  height: 420px;
+}

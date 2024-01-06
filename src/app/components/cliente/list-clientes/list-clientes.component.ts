@@ -38,9 +38,38 @@ export class ListClientesComponent implements OnInit {
     this.atualizarClientesFiltrados();
   }
 
+  // async getAllClientes(): Promise<any[]> {
+  //   try {
+  //     const clientes = await this.clienteService.getClientes();
+
+  //     const clientesComEndereco = await Promise.all(
+  //       clientes.map(async (cliente: any) => {
+  //         const endereco = await this.enderecoService.getEnderecoPorCodigo(cliente.codigoEndereco);
+  //         return { ...cliente, endereco };
+  //       })
+  //     );
+
+  //     this.clientes = clientesComEndereco;
+
+  //     this.clientesFiltrados = clientes;
+  //     this.pesquisarClientes();
+
+  //     return clientesComEndereco;
+  //   } catch (error) {
+  //     console.error('Erro ao buscar todos os clientes: ', error);
+  //     return [];
+  //   }
+  // }
+
   async getAllClientes(): Promise<any[]> {
     try {
       const clientes = await this.clienteService.getClientes();
+
+      // Certifique-se de que 'clientes' é um array antes de continuar
+      if (!Array.isArray(clientes)) {
+        console.error('Dados de clientes não são um array válido:', clientes);
+        return [];
+      }
 
       const clientesComEndereco = await Promise.all(
         clientes.map(async (cliente: any) => {
@@ -60,6 +89,7 @@ export class ListClientesComponent implements OnInit {
       return [];
     }
   }
+
 
   pesquisarClientes() {
     if (this.termoDePesquisaCliente.trim() !== '') {

@@ -29,10 +29,14 @@ import { RealBrasileiroPipe } from './shared/pipes/moedas/real/RealBrasileiro.pi
 import { FormatoDataBasicoPipe } from './shared/pipes/formatoDatas/basico/FormatoDataBasico.pipe';
 import { PaginacaoComponent } from './shared/components/paginacao/paginacao.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { LoginComponent } from './components/login/login/login.component';
+import { CreateUsuarioComponent } from './components/login/create-usuario/create-usuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    CreateUsuarioComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent,

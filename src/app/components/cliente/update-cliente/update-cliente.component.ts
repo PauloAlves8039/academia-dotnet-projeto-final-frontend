@@ -36,16 +36,22 @@ export class UpdateClienteComponent implements OnInit {
     const codigoCliente = this.obterCodigoClienteDaRota();
 
     if (codigoCliente) {
-      this.clienteExistente = await this.clienteService.getClientePorCodigo(codigoCliente);
+      const clienteResult = await this.clienteService.getClientePorCodigo(codigoCliente);
 
-      if (typeof this.clienteExistente.dataNascimento === 'string') {
-        this.clienteExistente.dataNascimento = new Date(this.clienteExistente.dataNascimento);
+      if (clienteResult !== null) {
+        this.clienteExistente = clienteResult;
+
+        if (typeof this.clienteExistente.dataNascimento === 'string') {
+          this.clienteExistente.dataNascimento = new Date(this.clienteExistente.dataNascimento);
+        }
+      } else {
+        this.alertService.mostrarAlerta(`Erro ao carregar cliente. Tente novamente mais tarde.`, false);
       }
-
     } else {
       this.alertService.mostrarAlerta(`Código do cliente não fornecido na rota.`, false);
     }
   }
+
 
   async atualizarCliente() {
     try {

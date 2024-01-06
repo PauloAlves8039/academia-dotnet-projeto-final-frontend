@@ -10,7 +10,13 @@
   --warning-color: #FFB90F;
   --neutral-color: #FFFFFF;
   --neutral-color2: #9C9C9C;
+  --dark-color: #000000;
   --background-transparent: rgba(0, 0, 0, 0.5);
+}
+
+.title-login {
+  text-align: center;
+  color: var(--primary-color);
 }
 
 .page-title {
@@ -55,6 +61,12 @@
 
 .button-form {
   width: 170px;
+  border: 1px solid var(--neutral-color2);
+  border-radius: 4px;
+}
+
+.button-form-2 {
+  width: 200px;
   border: 1px solid var(--neutral-color2);
   border-radius: 4px;
 }
