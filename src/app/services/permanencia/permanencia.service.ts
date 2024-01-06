@@ -1,27 +1,38 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { ClienteVeiculoService } from '../clienteVeiculo/clienteVeiculo.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PermanenciaService {
   private apiUrl = 'https://localhost:7269/api/Permanencia';
+  private _token = '';
 
-  constructor(private clienteVeiculoService: ClienteVeiculoService) {}
+  constructor(
+    private clienteVeiculoService: ClienteVeiculoService,
+    private authService: AuthService
+  ) {}
 
   async getPermanencias() {
     try {
-      const response = await axios.get(this.apiUrl);
+      const token = this.getToken();
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axios.get(this.apiUrl, config);
       return response.data;
     } catch (error) {
-      console.error('Erro ao buscar todos as permanências: ', error);
+      console.error('Erro ao buscar todas as permanências: ', error);
     }
   }
 
   async addPermanencia(permanenciaData: any) {
     try {
-      const response = await axios.post(this.apiUrl, permanenciaData);
+      const token = this.getToken();
+      const config = { headers: { Authorization: `Bearer ${token}` }};
+
+      const response = await axios.post(this.apiUrl, permanenciaData, config);
       return response.data;
     } catch (error) {
       console.error('Erro ao cadastrar permanência: ', error);
@@ -31,21 +42,23 @@ export class PermanenciaService {
 
   async getPermanenciaPorCodigo(codigoPermanencia: number) {
     try {
-      const response = await axios.get(`${this.apiUrl}/${codigoPermanencia}`);
+      const token = this.getToken();
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axios.get(`${this.apiUrl}/${codigoPermanencia}`, config);
       return response.data;
     } catch (error) {
-      console.error(
-        `Erro ao obter permanência com código ${codigoPermanencia}: `, error
-      );
+      console.error(`Erro ao obter permanência com código ${codigoPermanencia}: `, error );
     }
   }
 
   async updatePermanencia(permanenciaData: any) {
     try {
-      const response = await axios.put(
-        `${this.apiUrl}/${permanenciaData.codigoPermanencia}`,
-        permanenciaData
-      );
+      const token = this.getToken();
+
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axios.put(`${this.apiUrl}/${permanenciaData.codigoPermanencia}`, permanenciaData, config);
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar permanência: ', error);
@@ -55,8 +68,12 @@ export class PermanenciaService {
 
   async deletePermanencia(codigoPermanencia: number) {
     try {
+      const token = this.getToken();
+
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
       const url = `${this.apiUrl}/${codigoPermanencia}`;
-      const response = await axios.delete(url);
+      const response = await axios.delete(url, config);
       return response.data;
     } catch (error) {
       console.error('Erro ao excluir permanência: ', error);
@@ -71,14 +88,9 @@ export class PermanenciaService {
       const detalhesPermanencias = await Promise.all(
         clienteVeiculos.map(async (cv: any) => {
           try {
-            const permanenciaResponse =
-              await this.getDetalhesPermanenciaPorClienteVeiculo(
-                cv.codigoClienteVeiculo
-              );
-            const clienteResponse =
-              await this.clienteVeiculoService.getDetalhesCliente(cv.clienteId);
-            const veiculoResponse =
-              await this.clienteVeiculoService.getDetalhesVeiculo(cv.veiculoId);
+            const permanenciaResponse = await this.getDetalhesPermanenciaPorClienteVeiculo(cv.codigoClienteVeiculo);
+            const clienteResponse = await this.clienteVeiculoService.getDetalhesCliente(cv.clienteId);
+            const veiculoResponse = await this.clienteVeiculoService.getDetalhesVeiculo(cv.veiculoId);
 
             return {
               codigoClienteVeiculo: cv.codigoClienteVeiculo,
@@ -89,9 +101,7 @@ export class PermanenciaService {
               ...permanenciaResponse.data,
             };
           } catch (error) {
-            console.error(
-              `Erro ao buscar detalhes de cliente, veículo ou permanência para código ${cv.codigoClienteVeiculo}: `, error
-            );
+            console.error(`Erro ao buscar detalhes de cliente, veículo ou permanência para código ${cv.codigoClienteVeiculo}: `, error);
             return {
               codigoClienteVeiculo: cv.codigoClienteVeiculo,
               clienteVeiculoId: cv.codigoClienteVeiculo,
@@ -105,23 +115,32 @@ export class PermanenciaService {
 
       return detalhesPermanencias;
     } catch (error) {
-      console.error(
-        'Erro ao buscar todas as permanências com detalhes: ', error
-      );
+      console.error('Erro ao buscar todas as permanências com detalhes: ', error );
       throw error;
     }
   }
 
   async getDetalhesPermanenciaPorClienteVeiculo(codigoClienteVeiculo: number) {
     try {
+      const token = this.getToken();
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
       const url = `${this.apiUrl}/ClienteVeiculo/${codigoClienteVeiculo}`;
-      const response = await axios.get(url);
+      const response = await axios.get(url, config);
       return response.data;
     } catch (error) {
-      console.error(
-        'Erro ao buscar detalhes da permanência por cliente e veículo: ', error
-      );
+      console.error( 'Erro ao buscar detalhes da permanência por cliente e veículo: ', error );
       throw error;
     }
+  }
+
+  private getToken(): string | null {
+    const token = this.authService.getToken();
+
+    if (!token) {
+      console.error('Token de autenticação ausente.');
+      return null;
+    }
+    return token;
   }
 }

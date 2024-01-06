@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { ClienteVeiculo } from '../../models/clienteVeiculo/ClienteVeiculo';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +11,16 @@ export class ClienteVeiculoService {
   private apiUrlCliente = 'https://localhost:7269/api/Cliente';
   private apiUrlVeiculo = 'https://localhost:7269/api/Veiculo';
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   async getClientesVeiculos(): Promise<ClienteVeiculo[]> {
     try {
-      const response = await axios.get(this.apiUrl);
+      const token = this.getToken();
+
+      const response = await axios.get(this.apiUrl, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       const clientesVeiculos = response.data;
 
       const detalhesClientesVeiculos = await Promise.all(
@@ -30,11 +36,8 @@ export class ClienteVeiculoService {
               nomeCliente: clienteResponse.data.nome,
               marcaVeiculo: veiculoResponse.data.marca,
             };
-          } catch (innerError) {
-            console.error(
-              `Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `,
-              innerError
-            );
+          } catch (error) {
+            console.error(`Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: `, error );
             return {
               codigoClienteVeiculo: cv.codigoClienteVeiculo,
               clienteId: cv.clienteId,
@@ -56,16 +59,44 @@ export class ClienteVeiculoService {
   async getClienteVeiculoPorCodigo(CodigoClienteVeiculo: number) {
     try {
       const url = `${this.apiUrl}/${CodigoClienteVeiculo}`;
-      const response = await axios.get(url);
+      const token = this.getToken();
+
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar cliente e veículo por código: ', error);
     }
   }
 
+  public async getDetalhesCliente(clienteId: number) {
+    const urlCliente = `${this.apiUrlCliente}/${clienteId}`;
+    const token = this.getToken();
+
+    return axios.get(urlCliente, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+
+  public async getDetalhesVeiculo(veiculoId: number) {
+    const urlVeiculo = `${this.apiUrlVeiculo}/${veiculoId}`;
+    const token = this.getToken();
+
+    return axios.get(urlVeiculo, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+
   async addClienteVeiculo(clienteVeiculo: ClienteVeiculo) {
     try {
-      const response = await axios.post(this.apiUrl, clienteVeiculo);
+      const token = this.getToken();
+
+      const response = await axios.post(this.apiUrl, clienteVeiculo, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       return response.data;
     } catch (error) {
       console.error('Erro ao associar cadastro de cliente e veículo: ', error);
@@ -75,7 +106,12 @@ export class ClienteVeiculoService {
   async updateClienteVeiculo(clienteVeiculo: ClienteVeiculo) {
     try {
       const url = `${this.apiUrl}/${clienteVeiculo.codigoClienteVeiculo}`;
-      const response = await axios.put(url, clienteVeiculo);
+      const token = this.getToken();
+
+      const response = await axios.put(url, clienteVeiculo, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       return response.data;
     } catch (error) {
       console.error('Erro ao associar atualização cliente do cliente: ', error);
@@ -85,21 +121,25 @@ export class ClienteVeiculoService {
   async deleteClienteVeiculo(codigoClienteVeiculo: number) {
     try {
       const url = `${this.apiUrl}/${codigoClienteVeiculo}`;
-      const response = await axios.delete(url);
+      const token = this.getToken();
+
+      const response = await axios.delete(url, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       return response.data;
     } catch (error) {
       console.error('Erro ao excluir associação entre cliente e veículo: ', error);
     }
   }
 
-  async getDetalhesCliente(clienteId: number) {
-    const urlCliente = `${this.apiUrlCliente}/${clienteId}`;
-    return axios.get(urlCliente);
-  }
+  private getToken(): string | null {
+    const token = this.authService.getToken();
 
-  async getDetalhesVeiculo(veiculoId: number) {
-    const urlVeiculo = `${this.apiUrlVeiculo}/${veiculoId}`;
-    return axios.get(urlVeiculo);
+    if (!token) {
+      console.error('Token de autenticação ausente.');
+      return null;
+    }
+    return token;
   }
-
 }
