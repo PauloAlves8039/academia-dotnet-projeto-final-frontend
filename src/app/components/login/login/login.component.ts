@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.usuario)
         .then(() => {
           this.router.navigate(['/home']);
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
         })
         .catch(error => {
           this.alertService.mostrarAlerta(`Erro ao logar! Verifique as suas credencias - ${error}`, false);

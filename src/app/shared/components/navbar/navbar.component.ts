@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  userEmail: string | null = null;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const isAuthenticated = this.authService.ehAutenticado();
+
+    if (isAuthenticated) {
+      this.userEmail = this.authService.obterEmailUsuario();
+    }
+  }
 
   verificarAutenticacao(): boolean {
     return this.authService.ehAutenticado();

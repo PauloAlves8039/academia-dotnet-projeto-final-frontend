@@ -58,11 +58,11 @@ export class AuthService {
     }
 
     try {
-      const response = await axios.get(`${this.apiUrl}/recursoProtegido`, {
+      const resposta = await axios.get(`${this.apiUrl}/recursoProtegido`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      return response.data;
+      return resposta.data;
     } catch (error) {
       console.error('Erro na requisição protegida:', error);
       throw error;
@@ -74,14 +74,30 @@ export class AuthService {
 
     if (token) {
       try {
-        const isExpired = this.jwtHelper.isTokenExpired(token);
-        return !isExpired;
+        const expirado = this.jwtHelper.isTokenExpired(token);
+        return !expirado;
       } catch (error) {
         console.error('Erro ao decodificar token: ', error);
         return false;
       }
     } else {
       return false;
+    }
+  }
+
+  obterEmailUsuario(): string | null {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        const decodificarToken = this.jwtHelper.decodeToken(token);
+        return decodificarToken.unique_name || null;
+      } catch (error) {
+        console.error('Erro ao decodificar token: ', error);
+        return null;
+      }
+    } else {
+      return null;
     }
   }
 
