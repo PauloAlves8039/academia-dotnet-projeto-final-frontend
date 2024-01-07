@@ -14,6 +14,7 @@ export class CreatePermanenciaComponent implements OnInit {
   permanencia: Permanencia = new Permanencia();
   permanenciaData: any = {};
   codigosClientesVeiculos: any[] = [];
+  opcoesTaxaPorHora: number[] = [3.00];
 
   constructor(
     private permanenciaService: PermanenciaService,
@@ -93,7 +94,8 @@ export class CreatePermanenciaComponent implements OnInit {
     return (
       !!this.permanenciaData.clienteVeiculoId &&
       !!this.permanenciaData.placa &&
-      !!this.permanenciaData.dataEntrada
+      !!this.permanenciaData.dataEntrada &&
+      !!this.permanenciaData.taxaPorHora
     );
   }
 

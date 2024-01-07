@@ -6,10 +6,10 @@
   <hr>
 
   <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
-    'alert-success': alertService.obterResultadoSucesso(),
-    'alert-danger': !alertService.obterResultadoSucesso(),
-    'alert': true
-  }" role="alert">
+      'alert-success': alertService.obterResultadoSucesso(),
+      'alert-danger': !alertService.obterResultadoSucesso(),
+      'alert': true
+    }" role="alert">
     {{ alertService.obterMensagem() }}
   </div>
 
@@ -52,6 +52,20 @@
                    [(ngModel)]="permanenciaData.dataEntrada" name="dataEntrada"
                    required>
           </div>
+
+          <div class="mb-2 input-form-md">
+            <label for="taxaPorHora" class="form-label">Taxa Por Hora</label>
+            <select class="form-control"
+                    id="taxaPorHora"
+                    [(ngModel)]="permanenciaData.taxaPorHora"
+                    name="taxaPorHora"
+                    required>
+              <option *ngFor="let taxaOption of opcoesTaxaPorHora" [value]="taxaOption">
+                {{ taxaOption }}
+              </option>
+            </select>
+          </div>
+
         </div>
 
       </div>
