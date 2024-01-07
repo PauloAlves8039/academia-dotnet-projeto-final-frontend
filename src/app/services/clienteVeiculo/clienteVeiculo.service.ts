@@ -129,7 +129,15 @@ export class ClienteVeiculoService {
 
       return response.data;
     } catch (error) {
-      console.error('Erro ao excluir associação entre cliente e veículo: ', error);
+      console.error('Erro ao excluir associação entre Cliente e Veículo: ', error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 403) {
+          throw new Error('Você não tem permissão para excluir associação entre Clientes e Veículos.');
+        }
+      }
+
+      throw error;
     }
   }
 

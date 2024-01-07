@@ -88,7 +88,14 @@ export class ClienteService {
       return response.data;
     } catch (error) {
       console.error('Erro ao excluir cliente: ', error);
-      return null;
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 403) {
+          throw new Error('Você não tem permissão para excluir Clientes.');
+        }
+      }
+
+      throw error;
     }
   }
 

@@ -89,7 +89,14 @@ export class VeiculoService {
       return response.data;
     } catch (error) {
       console.error('Erro ao excluir veículo: ', error);
-      return null;
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 403) {
+          throw new Error('Você não tem permissão para excluir Veículos.');
+        }
+      }
+
+      throw error;
     }
   }
 

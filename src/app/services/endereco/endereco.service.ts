@@ -84,8 +84,16 @@ export class EnderecoService {
       });
       return response.data;
     } catch (error) {
+
       console.error('Erro ao excluir endereço: ', error);
-      return null;
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 403) {
+          throw new Error('Você não tem permissão para excluir Endereços.');
+        }
+      }
+
+      throw error;
     }
   }
 

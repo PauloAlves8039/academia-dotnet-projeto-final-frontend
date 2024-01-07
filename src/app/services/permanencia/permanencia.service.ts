@@ -76,7 +76,15 @@ export class PermanenciaService {
       const response = await axios.delete(url, config);
       return response.data;
     } catch (error) {
-      console.error('Erro ao excluir permanência: ', error);
+      console.error('Erro ao excluir Permanência: ', error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 403) {
+          throw new Error('Você não tem permissão para excluir Permanências.');
+        }
+      }
+
+      throw error;
     }
   }
 
