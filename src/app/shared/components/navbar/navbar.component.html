@@ -1,25 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="assets/icon/moto.ico" alt="Ícone de Moto" width="30" height="30">
+      <img src="assets/icon/estacionamento.ico" alt="Ícone de Moto" width="25" height="25">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a *ngIf="!verificarAutenticacao()" class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/enderecos']" routerLinkActive="active">Endereços</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/veiculos']" routerLinkActive="active">Veículos</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes-veiculos']" routerLinkActive="active">Associados</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/permanencias']" routerLinkActive="active">Permanências</a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link">
-          Bem-vindo(a) {{ userEmail }}
-        </a>
-        <a *ngIf="verificarAutenticacao()" class="nav-link" (click)="executarLogout()">Sair</a>
-      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+          <a *ngIf="!verificarAutenticacao()" class="nav-link" [routerLink]="['/login']" routerLinkActive="active">
+            Login
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Início
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/enderecos']" routerLinkActive="active">
+            Endereços
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes']" routerLinkActive="active">
+            Clientes
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/veiculos']" routerLinkActive="active">
+            Veículos
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/clientes-veiculos']" routerLinkActive="active">
+            Associados
+          </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/permanencias']" routerLinkActive="active">
+            Permanências
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav d-flex flex-row ms-auto">
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link">Bem-vindo(a) {{ userEmail }} </a>
+        </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" (click)="executarLogout()"> Sair</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
