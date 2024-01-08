@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../../services/cliente/cliente.service';
 import { Router } from '@angular/router';
 import { EnderecoService } from '../../../services/endereco/endereco.service';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-list-clientes',
@@ -19,7 +20,8 @@ export class ListClientesComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private enderecoService: EnderecoService,
-    private router: Router) { }
+    private router: Router,
+    public alertService: AlertService) { }
 
   ngOnInit() {
     this.getAllClientes();
@@ -43,7 +45,7 @@ export class ListClientesComponent implements OnInit {
       const clientes = await this.clienteService.getClientes();
 
       if (!Array.isArray(clientes)) {
-        console.error('Dados de clientes não são um array válido:', clientes);
+        this.alertService.mostrarAlerta('Dados dos Clientes não são uma lista válida.', false);
         return [];
       }
 
@@ -61,7 +63,7 @@ export class ListClientesComponent implements OnInit {
 
       return clientesComEndereco;
     } catch (error) {
-      console.error('Erro ao buscar todos os clientes: ', error);
+      this.alertService.mostrarAlerta(`Erro ao buscar lista de Clientes: ${error}`, false);
       return [];
     }
   }
@@ -94,11 +96,11 @@ export class ListClientesComponent implements OnInit {
 
     if (confirmacao) {
       try {
-        const resposta = await this.clienteService.deleteCliente(codigoCliente);
-        alert('Cliente excluído com sucesso:'+ resposta);
+        await this.clienteService.deleteCliente(codigoCliente);
+        this.alertService.mostrarAlerta('Cliente excluído com sucesso!');
         this.getAllClientes();
-      } catch (erro) {
-        console.error('Erro ao excluir endereço:', erro);
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao excluir Cliente: ${error}`, false);
       }
     }
   }

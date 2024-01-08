@@ -67,7 +67,7 @@ export class ListPermanenciasComponent implements OnInit {
                 marcaVeiculo: veiculoResponse.data.marca,
               };
             } catch (error) {
-              this.alertService.mostrarAlerta(`Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: ${error}`, false);
+              this.alertService.mostrarAlerta(`Erro ao buscar detalhes de Cliente ou Veículo para o código ${cv.codigoClienteVeiculo}: ${error}`, false);
               return {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: 'Nome não disponível',
@@ -138,6 +138,7 @@ export class ListPermanenciasComponent implements OnInit {
       try {
         await this.permanenciaService.deletePermanencia(codigoPermanencia);
         this.alertService.mostrarAlerta('Permanência excluída com sucesso!');
+        
         this.getAllPermanencias();
       } catch (error) {
         this.alertService.mostrarAlerta(`Erro ao excluir Permanência: ${error}`, false);

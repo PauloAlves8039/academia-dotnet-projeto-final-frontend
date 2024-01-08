@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnderecoService } from '../../../services/endereco/endereco.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-list-enderecos',
@@ -17,7 +18,8 @@ export class ListEnderecosComponent implements OnInit {
 
   constructor(
     private enderecoService: EnderecoService,
-    private router: Router) {}
+    private router: Router,
+    public alertService: AlertService) {}
 
   ngOnInit() {
     this.getAllEnderecos();
@@ -63,11 +65,12 @@ export class ListEnderecosComponent implements OnInit {
 
     if (confirmacao) {
       try {
-        const resposta = await this.enderecoService.deleteEndereco(codigoEndereco);
-        alert('Endereço excluído com sucesso:'+ resposta);
+        await this.enderecoService.deleteEndereco(codigoEndereco);
+        this.alertService.mostrarAlerta('Endereço excluído com sucesso!');
+
         this.getAllEnderecos();
-      } catch (erro) {
-        console.error('Erro ao excluir endereço:', erro);
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao excluir Endereço: ${error}`, false);
       }
     }
   }

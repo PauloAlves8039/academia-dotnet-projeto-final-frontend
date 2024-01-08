@@ -1,3 +1,4 @@
+import { AlertService } from './../../../services/alert/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { ClienteVeiculoService } from '../../../services/clienteVeiculo/clienteVeiculo.service';
 import { Router } from '@angular/router';
@@ -23,7 +24,8 @@ export class ListClienteVeiculoComponent implements OnInit {
     private clienteVeiculoService: ClienteVeiculoService,
     private clienteService: ClienteService,
     private veiculoService: VeiculoService,
-    private router: Router) {}
+    private router: Router,
+    public alertService: AlertService) {}
 
   ngOnInit() {
     this.getAllClientesVeiculos();
@@ -79,11 +81,12 @@ export class ListClienteVeiculoComponent implements OnInit {
 
     if (confirmacao) {
       try {
-        const resposta = await this.clienteVeiculoService.deleteClienteVeiculo(codigoClienteVeiculo);
-        alert('Associação entre Cliente e Veículo excluída com sucesso:'+ resposta);
+        await this.clienteVeiculoService.deleteClienteVeiculo(codigoClienteVeiculo);
+        this.alertService.mostrarAlerta(`Associação entre Cliente e Veículo excluída com sucesso!`);
+
         this.getAllClientesVeiculos();
-      } catch (erro) {
-        console.error('Erro ao excluir associação entre Cliente e Veículo:', erro);
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao excluir associação entre Cliente e Veículo: ${error}`, false);
       }
     }
   }

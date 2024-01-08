@@ -5,6 +5,14 @@
 
   <app-spinner></app-spinner>
 
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+      'alert-success': alertService.obterResultadoSucesso(),
+      'alert-danger': !alertService.obterResultadoSucesso(),
+      'alert': true
+    }" role="alert">
+    {{ alertService.obterMensagem() }}
+  </div>
+
   <div class="row mt-4">
     <div class="col-md-8 mb-2">
       <div class="d-flex align-items-end">

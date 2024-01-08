@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VeiculoService } from '../../../services/veiculo/veiculo.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: 'app-list-veiculos',
@@ -17,7 +18,8 @@ export class ListVeiculosComponent implements OnInit {
 
   constructor(
     private veiculoService: VeiculoService,
-    private router: Router) {}
+    private router: Router,
+    public alertService: AlertService) {}
 
   ngOnInit() {
     this.getAllVeiculos();
@@ -63,11 +65,12 @@ export class ListVeiculosComponent implements OnInit {
 
     if (confirmacao) {
       try {
-        const resposta = await this.veiculoService.deleteVeiculo(codigoVeiculo);
-        alert('Veículo excluído com sucesso:'+ resposta);
+        await this.veiculoService.deleteVeiculo(codigoVeiculo);
+        this.alertService.mostrarAlerta('Veículo excluído com sucesso!');
+
         this.getAllVeiculos();
-      } catch (erro) {
-        console.error('Erro ao excluir veículo:', erro);
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao excluir Veiculo: ${error}`, false);
       }
     }
   }
