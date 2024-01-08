@@ -12,7 +12,8 @@
       'alert-success': alertService.obterResultadoSucesso(),
       'alert-danger': !alertService.obterResultadoSucesso(),
       'alert': true
-    }" role="alert">
+      }" role="alert"
+      class="mt-2">
     {{ alertService.obterMensagem() }}
   </div>
 

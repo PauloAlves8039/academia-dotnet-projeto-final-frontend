@@ -61,6 +61,7 @@ export class ListEnderecosComponent implements OnInit {
   }
 
   async excluirEndereco(codigoEndereco: number) {
+    alert('Atenção! Verifique se este endereço esta vinculado a um Cliente.');
     const confirmacao = confirm('Deseja realmente excluir este endereço?');
 
     if (confirmacao) {

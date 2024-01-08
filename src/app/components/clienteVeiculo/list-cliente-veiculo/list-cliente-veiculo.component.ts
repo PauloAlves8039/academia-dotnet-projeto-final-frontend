@@ -77,6 +77,7 @@ export class ListClienteVeiculoComponent implements OnInit {
   }
 
   async excluirClienteVeiculo(codigoClienteVeiculo: number) {
+    alert('Atenção! Verifique se esta associação esta vinculada a uma Permanência.');
     const confirmacao = confirm('Deseja realmente excluir esta associação entre Cliente e Veículo?');
 
     if (confirmacao) {
