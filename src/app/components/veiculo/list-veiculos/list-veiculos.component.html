@@ -1,6 +1,9 @@
 <div class="container-body">
-  <div>
-    <h2 class="page-title">Veículos</h2>
+
+  <div class="body-title bg-dark mt-2">
+    <h2 class="ms-2 page-title-2">
+      <i class="bi bi-scooter"></i> Veículos
+    </h2>
   </div>
 
   <app-spinner></app-spinner>
@@ -14,37 +17,42 @@
   </div>
 
   <div class="row mt-4">
-    <div class="col-md-8 mb-2">
+    <div class="col-md-6 mb-2">
       <div class="d-flex align-items-end">
-        <label for="termoDePesquisaVeiculo" class="me-3 mb-2">Pesquisar:</label>
+        <label for="termoDePesquisaVeiculo" class="me-2 mb-1">Pesquisar:</label>
         <input type="text"
-               class="form-control input-form-lg"
+               class="form-control"
                id="termoDePesquisaVeiculo"
           [(ngModel)]="termoDePesquisaVeiculo" />
+      </div>
+    </div>
 
-        <div class="col-md-3 ms-2">
+    <div class="col">
+      <div class="d-flex">
+        <div class="ms-2">
           <button class="btn button-info button-border button-form" (click)="pesquisarVeiculos()">
             <i class="bi bi-search"></i> Pesquisar
           </button>
         </div>
 
-        <div class="col-md-3 ms-2">
+        <div class="ms-2">
           <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
             <i class="bi bi-x-square"></i> Cancelar
           </button>
         </div>
-
-        <div class="col-md-3 ms-2">
-          <button class="btn button-success button-border button-form" (click)="abrirCadastroDoVeiculo()">
-            <i class="bi bi-file-plus"></i> Adicionar
-          </button>
-        </div>
-
       </div>
     </div>
+
   </div>
 
   <div class="mt-2">
+
+    <div class="mb-2">
+      <button class="btn button-success button-border button-form-2" (click)="abrirCadastroDoVeiculo()">
+        <i class="bi bi-file-plus"></i> Adicionar Veículo
+      </button>
+    </div>
+
     <table class="table table-bordered table-hover text-table">
       <thead class="table-dark">
         <tr>

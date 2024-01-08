@@ -4,6 +4,7 @@
 
 :root{
   --primary-color: #00BFFF;
+  --secundary-color: #836FFF;
   --info-color: #1E90FF;
   --success-color: #00CD00;
   --danger-color: #FF4500;
@@ -12,6 +13,10 @@
   --neutral-color2: #9C9C9C;
   --dark-color: #000000;
   --background-transparent: rgba(0, 0, 0, 0.5);
+}
+
+.main {
+  margin-bottom: 60px;
 }
 
 .title-login {
@@ -24,12 +29,19 @@
   color: var(--primary-color);
 }
 
+.page-title-2 {
+  text-align: center;
+  color: var(--neutral-color);
+}
+
 .page-subtitle {
   color: var(--primary-color);
 }
 
-.main {
-  margin-bottom: 60px;
+.body-title {
+  color: var(--neutral-color);
+  border-radius: 10px;
+  height: 50px;
 }
 
 .content-form {
@@ -53,6 +65,10 @@
   width: 300px;
 }
 
+.input-search {
+  width: 400px;
+}
+
 .container-body {
   align-items: center;
   justify-content: center;
@@ -70,7 +86,7 @@
 }
 
 .button-form-2 {
-  width: 200px;
+  width: 220px;
   border: 1px solid var(--neutral-color2);
   border-radius: 4px;
 }
@@ -122,14 +138,22 @@
 
 .button-cancel {
   background-color: var(--neutral-color);
-  color: var(--neutral-color2);
+  color: var(--dark-color);
 }
 
 .button-cancel:hover {
-  background-color: var(--neutral-color2);
+  background-color: var(--dark-color);
   color: var(--neutral-color);
 }
 
 .button-login {
   width: 325px;
+}
+
+.content-sucendary {
+  background-color: var(--secundary-color);
+}
+
+.navbar-link-color{
+  color: var(--neutral-color);
 }

@@ -1,4 +1,11 @@
 <div class="container-body">
+
+  <div class="body-title bg-dark mt-2">
+    <h2 class="ms-2 page-title-2">
+      <i class="bi bi-geo-alt-fill"></i> Endereços
+    </h2>
+  </div>
+
   <div>
     <h2 class="page-title">Endereços</h2>
   </div>
@@ -14,36 +21,43 @@
   </div>
 
   <div class="row mt-4">
-    <div class="col-md-8 mb-2">
+    <div class="col-md-6 mb-2">
       <div class="d-flex align-items-end">
-        <label for="termoDePesquisaEndereco" class="me-3 mb-2">Pesquisar:</label>
+        <label for="termoDePesquisaEndereco" class="me-2 mb-1">Pesquisar:</label>
         <input type="text"
-               class="form-control input-form-lg"
+               class="form-control"
                id="termoDePesquisaEndereco"
                [(ngModel)]="termoDePesquisaEndereco" />
+      </div>
+    </div>
 
-        <div class="col-md-3 ms-2">
+    <div class="col">
+      <div class="d-flex">
+        <div class="ms-2">
           <button class="btn button-info button-border button-form" (click)="pesquisarEnderecos()">
             <i class="bi bi-search"></i> Pesquisar
           </button>
         </div>
 
-        <div class="col-md-3 ms-2">
+        <div class="ms-2">
           <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
             <i class="bi bi-x-square"></i> Cancelar
           </button>
         </div>
 
-        <div class="col-md-3 ms-2">
-          <button class="btn button-success button-border button-form" (click)="abrirCadastroDeEndereco()">
-            <i class="bi bi-file-plus"></i> Adicionar
-          </button>
-        </div>
       </div>
     </div>
+
   </div>
 
   <div class="mt-2">
+
+    <div class="mb-2">
+      <button class="btn button-success button-border button-form-2" (click)="abrirCadastroDeEndereco()">
+        <i class="bi bi-file-plus"></i> Adicionar Endererço
+      </button>
+    </div>
+
     <table class="table table-bordered table-hover text-table">
       <thead class="table-dark">
         <tr>

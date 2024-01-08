@@ -1,6 +1,12 @@
 <div class="container-body">
-  <div>
-    <h2 class="page-title">Clientes e Veículos Associados</h2>
+
+  <div class="body-title bg-dark mt-2">
+    <h2 class="ms-2 page-title-2">
+      <i class="bi bi-people-fill"></i>
+      <span class="me-2"></span>
+      <i class="bi bi-scooter"></i>
+      Clientes e Veículos Associados
+    </h2>
   </div>
 
   <app-spinner></app-spinner>
@@ -14,29 +20,27 @@
   </div>
 
   <div class="row mt-4">
-    <div class="col-md-8 mb-2">
+    <div class="col-md-6 mb-2">
       <div class="d-flex align-items-end">
-        <label for="termoDePesquisaClientesVeiculos" class="me-3 mb-2">Pesquisar:</label>
+        <label for="termoDePesquisaClientesVeiculos" class="me-2 mb-1">Pesquisar:</label>
         <input type="text"
-               class="form-control input-form-lg"
+               class="form-control"
                id="termoDePesquisaClientesVeiculos"
           [(ngModel)]="termoDePesquisaClientesVeiculos" />
+      </div>
+    </div>
 
-        <div class="col-md-3 ms-2">
+    <div class="col">
+      <div class="d-flex">
+        <div class="ms-2">
           <button class="btn button-info button-border button-form" (click)="pesquisarClientesVeiculos()">
             <i class="bi bi-search"></i> Pesquisar
           </button>
         </div>
 
-        <div class="col-md-3 ms-2">
+        <div class="ms-2">
           <button class="btn button-cancel button-border button-form" (click)="limparCampoPesquisa()">
             <i class="bi bi-x-square"></i> Cancelar
-          </button>
-        </div>
-
-        <div class="col-md-3 ms-2">
-          <button class="btn button-success button-border button-form" (click)="abrirCadastroDeClienteVeiculo()">
-            <i class="bi bi-file-plus"></i> Adicionar
           </button>
         </div>
       </div>
@@ -44,6 +48,13 @@
   </div>
 
   <div class="mt-2">
+
+    <div class="mb-2">
+      <button class="btn button-success button-border button-form-2" (click)="abrirCadastroDeClienteVeiculo()">
+        <i class="bi bi-file-plus"></i> Adicionar Associação
+      </button>
+    </div>
+
     <table class="table table-bordered table-hover text-table">
       <thead class="table-dark">
         <tr>
