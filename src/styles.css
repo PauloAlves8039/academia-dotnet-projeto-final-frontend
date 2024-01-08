@@ -24,6 +24,10 @@
   color: var(--primary-color);
 }
 
+.page-subtitle {
+  color: var(--primary-color);
+}
+
 .main {
   margin-bottom: 60px;
 }

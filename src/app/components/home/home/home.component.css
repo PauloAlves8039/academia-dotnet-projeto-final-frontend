@@ -1,0 +1,24 @@
+.container-card {
+  filter: grayscale(100%);
+  transition: filter 0.5s;
+}
+
+.container-card:hover {
+  filter: grayscale(0%);
+}
+
+.filter-card {
+  transition: filter 0.5s;
+}
+
+.filter-card:hover {
+  filter: brightness(100%);
+}
+
+.card-hover {
+  transition: transform 0.4s;
+}
+
+.card-hover:hover {
+  transform: scale(1.02);
+}
