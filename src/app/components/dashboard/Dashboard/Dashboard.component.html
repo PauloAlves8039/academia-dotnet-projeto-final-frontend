@@ -1,0 +1,23 @@
+<div>
+
+  <div class="body-title bg-dark mt-2">
+    <h2 class="ms-2 page-title-2">
+      <i class="bi bi-bar-chart-line"></i> Mini Dashboard
+    </h2>
+  </div>
+
+  <app-spinner></app-spinner>
+
+<div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+  'alert-success': alertService.obterResultadoSucesso(),
+  'alert-danger': !alertService.obterResultadoSucesso(),
+  'alert': true
+  }" role="alert" class="mt-2">
+  {{ alertService.obterMensagem() }}
+</div>
+
+  <div class="mini-dashboard mt-4">
+    <canvas #barChart></canvas>
+  </div>
+</div>
+

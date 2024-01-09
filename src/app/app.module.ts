@@ -31,6 +31,7 @@ import { PaginacaoComponent } from './shared/components/paginacao/paginacao.comp
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { CreateUsuarioComponent } from './components/login/create-usuario/create-usuario.component';
+import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CreateUsuarioComponent } from './components/login/create-usuario/create
     UpdateClienteVeiculoComponent,
     ListPermanenciasComponent,
     CreatePermanenciaComponent,
+    DashboardComponent,
 
   ],
   imports: [
