@@ -4,7 +4,7 @@
 
 :root{
   --primary-color: #00BFFF;
-  --secundary-color: #836FFF;
+  --secundary-color: #03f3f3;
   --info-color: #1E90FF;
   --success-color: #00CD00;
   --danger-color: #FF4500;
@@ -19,9 +19,18 @@
   margin-bottom: 60px;
 }
 
+.body-login {
+  background-color: var(--secundary-color);
+}
+
 .title-login {
   text-align: center;
-  color: var(--primary-color);
+  color: var(--neutral-color);
+}
+
+.text-login-validate {
+  color: var(--danger-color);
+  font-weight: 700;
 }
 
 .page-title {

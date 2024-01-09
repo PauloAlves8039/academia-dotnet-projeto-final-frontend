@@ -9,7 +9,7 @@
 </div>
 
 <div class="usuario-container row">
-  <div class="col-md-4 usuario-container-form">
+  <div class="col-md-4 usuario-container-form body-login">
 
     <h2 class="title-login">
       <i class="bi bi-person-fill-add"></i> Criar Usuário
@@ -24,7 +24,7 @@
                class="form-control"
                [(ngModel)]="registrarUsuario.email"
                required>
-        <div *ngIf="formEnviado && !registrarUsuario.email" class="text-danger">Por favor, insira seu email.</div>
+        <div *ngIf="formEnviado && !registrarUsuario.email" class="text-login-validate">Por favor, insira seu email.</div>
       </div>
 
 
@@ -36,7 +36,7 @@
                class="form-control"
                [(ngModel)]="registrarUsuario.password"
                required>
-        <div *ngIf="formEnviado && !registrarUsuario.password" class="text-danger">Por favor, insira sua senha.</div>
+        <div *ngIf="formEnviado && !registrarUsuario.password" class="text-login-validate">Por favor, insira sua senha.</div>
       </div>
 
       <div class="mb-3">
@@ -47,7 +47,7 @@
                class="form-control"
                [(ngModel)]="registrarUsuario.confirmPassword"
                required>
-        <div *ngIf="formEnviado && !registrarUsuario.confirmPassword" class="text-danger">Por favor, confirme sua senha.</div>
+        <div *ngIf="formEnviado && !registrarUsuario.confirmPassword" class="text-login-validate">Por favor, confirme sua senha.</div>
       </div>
 
       <div class="col-md-12">
