@@ -1,4 +1,4 @@
-<div class="container-body">
+<div>
 
 <div class="body-title bg-dark mt-2">
   <h2 class="ms-2 page-title-2">
@@ -72,12 +72,12 @@
         <td>{{ cliente.nome }}</td>
         <td>{{ formatarData(cliente.dataNascimento) }}</td>
         <td>{{ cliente.cpf | formatoCpf }}</td>
-        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.telefone | formatoTelefone }}</td>
         <td>{{ cliente.email }}</td>
-        <td>{{ cliente.endereco?.logradouro }}, {{ cliente.endereco?.cidade }}, {{ cliente.endereco?.numero }}</td>
+        <td>{{ cliente.endereco?.logradouro }}, {{ cliente.endereco?.numero }}, {{ cliente.endereco?.cidade }} </td>
         <td>
           <button type="button"
-                  class="btn button-warning button-border btn-sm btn-sm me-1"
+                  class="btn button-warning button-border btn-sm me-1"
                   (click)="editarCliente(cliente.codigoCliente)"
                   title="Editar">
             <i class="bi bi-pencil-square"> Editar</i>
