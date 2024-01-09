@@ -32,6 +32,9 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
 import { LoginComponent } from './components/login/login/login.component';
 import { CreateUsuarioComponent } from './components/login/create-usuario/create-usuario.component';
 import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.component';
+import { FormatoCpfPipe } from './shared/pipes/formatoCampo/formatoCpf/formatoCpf.pipe';
+import { FormatoTelefonePipe } from './shared/pipes/formatoCampo/formatoTelefone/formatoTelefone.pipe';
+import { FormatoCepPipe } from './shared/pipes/formatoCampo/formatoCep/formatoCep.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.c
     SpinnerComponent,
     RealBrasileiroPipe,
     FormatoDataBasicoPipe,
+    FormatoCpfPipe,
+    FormatoCepPipe,
+    FormatoTelefonePipe,
     ListEnderecosComponent,
     CreateEnderecoComponent,
     UpdateEnderecoComponent,
@@ -71,6 +77,11 @@ import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.c
     HttpClientModule,
   ],
   providers: [AlertService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    FormatoCpfPipe,
+    FormatoTelefonePipe,
+    FormatoCepPipe,
+  ],
 })
 export class AppModule { }

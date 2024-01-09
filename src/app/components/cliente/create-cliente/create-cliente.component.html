@@ -18,7 +18,7 @@
       <div class="col-sm-6">
 
         <div class="mb-2">
-          <label for="nome" class="form-label">Nome</label>
+          <label for="nome" class="form-label">Nome<span>*</span></label>
           <input type="text"
                  class="form-control input-form-lg"
                  id="nome"
@@ -28,7 +28,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+          <label for="dataNascimento" class="form-label">Data de Nascimento<span>*</span></label>
           <input type="date"
                  class="form-control input-form-md"
                  id="dataNascimento"
@@ -38,22 +38,24 @@
         </div>
 
         <div class="mb-2">
-          <label for="cpf" class="form-label">CPF</label>
+          <label for="cpf" class="form-label">CPF<span>*</span></label>
           <input type="text"
-                 class="form-control"
+                 class="form-control input-form-sm-3"
                  id="cpf"
                  name="cpf"
                  [(ngModel)]="cliente.cpf"
+                 [value]="cliente.cpf | formatoCpf"
                  required>
         </div>
 
         <div class="mb-2">
-          <label for="telefone" class="form-label">Telefone</label>
+          <label for="telefone" class="form-label">Telefone<span>*</span></label>
           <input type="text"
-                 class="form-control input-form-lg"
+                 class="form-control input-form-sm-3"
                  id="telefone"
                  name="telefone"
                  [(ngModel)]="cliente.telefone"
+                 [value]="cliente.telefone | formatoTelefone"
                  required>
         </div>
 
@@ -62,7 +64,7 @@
       <div class="col-sm-6">
 
         <div class="mb-2">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Email<span>*</span></label>
           <input type="text"
                  class="form-control input-form-lg"
                  id="email"
@@ -72,8 +74,8 @@
         </div>
 
         <div class="mb-2">
-          <label for="endereco" class="form-label">Endereco</label>
-          <select class="form-control input-form-lg"
+          <label for="endereco" class="form-label">Endereco<span>*</span></label>
+          <select class="form-control input-form-lg-2"
                   id="endereco"
                   name="endereco"
                   [(ngModel)]="cliente.codigoEndereco"

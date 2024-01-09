@@ -20,7 +20,7 @@
         <div class="col-sm-6">
 
           <div class="mb-2 input-form-md">
-            <label for="clienteVeiculoId" class="form-label">Cliente e Veículo</label>
+            <label for="clienteVeiculoId" class="form-label">Cliente e Veículo<span>*</span></label>
 
             <select class="form-control input-form-lg" id="clienteVeiculoId" [(ngModel)]="permanenciaData.clienteVeiculoId"
               name="clienteVeiculoId" required>
@@ -32,7 +32,7 @@
           </div>
 
           <div class="mb-2 input-form-md">
-            <label for="placa" class="form-label">Placa</label>
+            <label for="placa" class="form-label">Placa<span>*</span></label>
             <input type="text"
                    class="form-control"
                    id="placa"
@@ -45,7 +45,7 @@
 
         <div class="col-sm-6">
           <div class="mb-2 input-form-md">
-            <label for="dataEntrada" class="form-label">Data de Entrada</label>
+            <label for="dataEntrada" class="form-label">Data de Entrada<span>*</span></label>
             <input type="datetime-local"
                    class="form-control"
                    id="dataEntrada"
@@ -54,14 +54,14 @@
           </div>
 
           <div class="mb-2 input-form-md">
-            <label for="taxaPorHora" class="form-label">Taxa Por Hora</label>
+            <label for="taxaPorHora" class="form-label">Taxa Por Hora<span>*</span></label>
             <select class="form-control"
                     id="taxaPorHora"
                     [(ngModel)]="permanenciaData.taxaPorHora"
                     name="taxaPorHora"
                     required>
               <option *ngFor="let taxaOption of opcoesTaxaPorHora" [value]="taxaOption">
-                {{ taxaOption }}
+                {{ taxaOption | RealBrasileiro }}
               </option>
             </select>
           </div>

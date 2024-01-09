@@ -76,7 +76,6 @@ export class CreateEnderecoComponent implements OnInit {
     }
 
     if (cep.length !== 8) {
-      alert('O campo CEP deve ter exatamente 8 dígitos.');
       this.alertService.mostrarAlerta(`O campo CEP deve ter exatamente 8 dígitos.`, false);
       return false;
     }

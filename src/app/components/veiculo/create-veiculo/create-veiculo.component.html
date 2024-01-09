@@ -18,7 +18,7 @@
       <div class="col-sm-6">
 
         <div class="mb-2">
-          <label for="tipo" class="form-label">Tipo</label>
+          <label for="tipo" class="form-label">Tipo<span>*</span></label>
           <select class="form-control input-form-sm"
                   id="tipo"
                   name="tipo"
@@ -30,9 +30,9 @@
 
 
         <div class="mb-2">
-          <label for="marca" class="form-label">Marca</label>
+          <label for="marca" class="form-label">Marca<span>*</span></label>
           <input type="text"
-                 class="form-control input-form-lg"
+                 class="form-control input-form-md"
                  id="marca"
                  name="marca"
                  [(ngModel)]="novoVeiculo.marca"
@@ -40,7 +40,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="modelo" class="form-label">Modelo</label>
+          <label for="modelo" class="form-label">Modelo<span>*</span></label>
           <input type="text"
                  class="form-control input-form-md"
                  id="modelo"
@@ -54,9 +54,9 @@
       <div class="col-sm-6">
 
         <div class="mb-2">
-          <label for="cor" class="form-label">Cor</label>
+          <label for="cor" class="form-label">Cor<span>*</span></label>
           <input type="text"
-                 class="form-control input-form-lg"
+                 class="form-control input-form-sm-3"
                  id="cor"
                  name="cor"
                  [(ngModel)]="novoVeiculo.cor"
@@ -64,7 +64,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="ano" class="form-label">Ano</label>
+          <label for="ano" class="form-label">Ano<span>*</span></label>
           <input type="number"
                  class="form-control input-form-sm"
                  id="ano"

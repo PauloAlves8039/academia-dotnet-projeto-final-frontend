@@ -92,6 +92,7 @@ export class ListClientesComponent implements OnInit {
   }
 
   async excluirCliente(codigoCliente: number) {
+    alert('Atenção! Verifique se este Cliente esta vinculado a uma Associação entre Cliente e Veículo.');
     const confirmacao = confirm('Deseja realmente excluir este cliente?');
 
     if (confirmacao) {

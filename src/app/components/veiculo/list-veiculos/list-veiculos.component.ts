@@ -61,7 +61,8 @@ export class ListVeiculosComponent implements OnInit {
   }
 
   async excluirVeiculo(codigoVeiculo: number) {
-    const confirmacao = confirm('Deseja realmente excluir este veículo?');
+    alert('Atenção! Verifique se este Veículo esta vinculado a uma Associação entre Cliente e Veículo.');
+    const confirmacao = confirm('Deseja realmente excluir este Veículo?');
 
     if (confirmacao) {
       try {

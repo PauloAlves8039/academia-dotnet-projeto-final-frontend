@@ -66,12 +66,20 @@
   width: 120px;
 }
 
+.input-form-sm-3 {
+  width: 150px;
+}
+
 .input-form-md {
   width: 200px;
 }
 
 .input-form-lg {
   width: 300px;
+}
+
+.input-form-lg-2 {
+  width: 400px;
 }
 
 .input-search {

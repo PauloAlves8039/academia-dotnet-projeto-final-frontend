@@ -71,7 +71,7 @@
       <tr *ngFor="let cliente of clientesFiltrados">
         <td>{{ cliente.nome }}</td>
         <td>{{ formatarData(cliente.dataNascimento) }}</td>
-        <td>{{ cliente.cpf }}</td>
+        <td>{{ cliente.cpf | formatoCpf }}</td>
         <td>{{ cliente.telefone }}</td>
         <td>{{ cliente.email }}</td>
         <td>{{ cliente.endereco?.logradouro }}, {{ cliente.endereco?.cidade }}, {{ cliente.endereco?.numero }}</td>
