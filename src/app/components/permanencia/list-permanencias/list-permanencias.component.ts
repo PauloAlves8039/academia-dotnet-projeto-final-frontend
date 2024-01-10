@@ -65,6 +65,7 @@ export class ListPermanenciasComponent implements OnInit {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: clienteResponse.data.nome,
                 marcaVeiculo: veiculoResponse.data.marca,
+                modeloVeiculo: veiculoResponse.data.modelo,
               };
             } catch (error) {
               this.alertService.mostrarAlerta(`Erro ao buscar detalhes de Cliente ou Veículo para o código ${cv.codigoClienteVeiculo}: ${error}`, false);
@@ -72,6 +73,7 @@ export class ListPermanenciasComponent implements OnInit {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: 'Nome não disponível',
                 marcaVeiculo: 'Marca não disponível',
+                modeloVeiculo: 'Modelo não dispinível'
               };
             }
           })
@@ -96,6 +98,13 @@ export class ListPermanenciasComponent implements OnInit {
       (cv) => cv.clienteVeiculoId === clienteVeiculoId
     );
     return clienteVeiculo ? clienteVeiculo.marcaVeiculo : 'Marca não disponível';
+  }
+
+  encontrarModeloVeiculo(clienteVeiculoId: number): string {
+    const clienteVeiculo = this.codigosClientesVeiculos.find(
+      (cv) => cv.clienteVeiculoId === clienteVeiculoId
+    );
+    return clienteVeiculo ? clienteVeiculo.modeloVeiculo : 'Modelo não disponível';
   }
 
   async atualizarPermanencia(dadosAtualizados: any) {

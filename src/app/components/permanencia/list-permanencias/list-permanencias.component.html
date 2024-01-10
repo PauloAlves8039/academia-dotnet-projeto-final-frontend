@@ -71,7 +71,8 @@
         <tr *ngFor="let permanencia of permanenciasFiltradas">
           <td>
               {{ encontrarNomeCliente(permanencia.clienteVeiculoId) }} -
-              {{ encontrarMarcaVeiculo(permanencia.clienteVeiculoId) }}
+              {{ encontrarMarcaVeiculo(permanencia.clienteVeiculoId) }} -
+              {{ encontrarModeloVeiculo(permanencia.clienteVeiculoId) }}
           </td>
           <td>{{ permanencia.placa }}</td>
           <td>{{ permanencia.dataEntrada | FormatoDataBasico }}</td>
