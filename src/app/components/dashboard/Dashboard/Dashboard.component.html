@@ -8,16 +8,17 @@
 
   <app-spinner></app-spinner>
 
-<div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
-  'alert-success': alertService.obterResultadoSucesso(),
-  'alert-danger': !alertService.obterResultadoSucesso(),
-  'alert': true
-  }" role="alert" class="mt-2">
-  {{ alertService.obterMensagem() }}
-</div>
+  <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
+    'alert-success': alertService.obterResultadoSucesso(),
+    'alert-danger': !alertService.obterResultadoSucesso(),
+    'alert': true
+    }" role="alert" class="mt-2">
+    {{ alertService.obterMensagem() }}
+  </div>
 
   <div class="mini-dashboard mt-4">
     <canvas #barChart></canvas>
   </div>
+
 </div>
 
