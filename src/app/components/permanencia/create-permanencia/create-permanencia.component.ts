@@ -46,6 +46,7 @@ export class CreatePermanenciaComponent implements OnInit {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: clienteResponse.data.nome,
                 marcaVeiculo: veiculoResponse.data.marca,
+                modeloVeiculo: veiculoResponse.data.modelo,
               };
             } catch (error) {
               this.alertService.mostrarAlerta(`Erro ao buscar detalhes de cliente ou veículo para código ${cv.codigoClienteVeiculo}: ${error}`, false);
@@ -53,6 +54,7 @@ export class CreatePermanenciaComponent implements OnInit {
                 clienteVeiculoId: cv.codigoClienteVeiculo,
                 nomeCliente: 'Nome não disponível',
                 marcaVeiculo: 'Marca não disponível',
+                modeloVeiculo: 'Modelo não disponível'
               };
             }
           })

@@ -1,5 +1,5 @@
 <div>
-  
+
   <div>
     <h2 class="page-title">Cadastro de Permanência</h2>
   </div>
@@ -26,7 +26,7 @@
             <select class="form-control input-form-lg" id="clienteVeiculoId" [(ngModel)]="permanenciaData.clienteVeiculoId"
               name="clienteVeiculoId" required>
               <option *ngFor="let clienteVeiculo of codigosClientesVeiculos" [value]="clienteVeiculo.clienteVeiculoId">
-                {{ clienteVeiculo.nomeCliente }} - {{ clienteVeiculo.marcaVeiculo }}
+                {{ clienteVeiculo.nomeCliente }} - {{ clienteVeiculo.marcaVeiculo }} - {{ clienteVeiculo.modeloVeiculo }}
               </option>
             </select>
 
