@@ -98,15 +98,18 @@ export class ListPermanenciasComponent implements OnInit {
     return clienteVeiculo ? clienteVeiculo.marcaVeiculo : 'Marca não disponível';
   }
 
-
   async atualizarPermanencia(dadosAtualizados: any) {
-    try {
-      await this.permanenciaService.updatePermanencia(dadosAtualizados);
-      this.alertService.mostrarAlerta('Permanência concluída com sucesso!');
+    const confirmacao = window.confirm('Deseja realmente concluir esta permanência?');
 
-      this.getAllPermanencias();
-    } catch (error) {
-      this.alertService.mostrarAlerta(`Erro ao concluir Permanência: ${error}`, false);
+    if (confirmacao) {
+      try {
+        await this.permanenciaService.updatePermanencia(dadosAtualizados);
+        this.alertService.mostrarAlerta('Permanência concluída com sucesso!');
+
+        this.getAllPermanencias();
+      } catch (error) {
+        this.alertService.mostrarAlerta(`Erro ao concluir Permanência: ${error}`, false);
+      }
     }
   }
 
@@ -138,7 +141,7 @@ export class ListPermanenciasComponent implements OnInit {
       try {
         await this.permanenciaService.deletePermanencia(codigoPermanencia);
         this.alertService.mostrarAlerta('Permanência excluída com sucesso!');
-        
+
         this.getAllPermanencias();
       } catch (error) {
         this.alertService.mostrarAlerta(`Erro ao excluir Permanência: ${error}`, false);

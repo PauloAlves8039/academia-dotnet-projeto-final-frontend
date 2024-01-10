@@ -84,7 +84,8 @@
             <button type="button"
                     class="btn button-success button-border btn-sm me-1"
                     (click)="atualizarPermanencia(permanencia)"
-                    title="Editar" >
+                    title="Editar"
+                    [disabled]="permanencia.estadoPermanencia === 'Retirado'">
               <i class="bi bi-check-square-fill"> Concluir</i>
             </button>
             <button type="button"
