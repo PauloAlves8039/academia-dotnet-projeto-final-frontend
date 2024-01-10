@@ -19,6 +19,7 @@ import { LoginComponent } from './components/login/login/login.component';
 import { AuthGuard } from './shared/guards/AuthGuard';
 import { CreateUsuarioComponent } from './components/login/create-usuario/create-usuario.component';
 import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.component';
+import { ContatosComponent } from './components/contatos/contatos/contatos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'permanencias', component: ListPermanenciasComponent, canActivate: [AuthGuard] },
   { path: 'create-permanencia', component: CreatePermanenciaComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

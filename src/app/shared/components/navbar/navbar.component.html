@@ -54,6 +54,11 @@
             Dashboard
           </a>
         </li>
+        <li>
+          <a *ngIf="verificarAutenticacao()" class="nav-link" [routerLink]="['/contatos']" routerLinkActive="active">
+            Contatos
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav d-flex flex-row ms-auto">
         <li>

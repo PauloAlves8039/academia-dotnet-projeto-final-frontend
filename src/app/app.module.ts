@@ -35,6 +35,7 @@ import { DashboardComponent } from './components/dashboard/Dashboard/Dashboard.c
 import { FormatoCpfPipe } from './shared/pipes/formatoCampo/formatoCpf/formatoCpf.pipe';
 import { FormatoTelefonePipe } from './shared/pipes/formatoCampo/formatoTelefone/formatoTelefone.pipe';
 import { FormatoCepPipe } from './shared/pipes/formatoCampo/formatoCep/formatoCep.pipe';
+import { ContatosComponent } from './components/contatos/contatos/contatos.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { FormatoCepPipe } from './shared/pipes/formatoCampo/formatoCep/formatoCe
     ListPermanenciasComponent,
     CreatePermanenciaComponent,
     DashboardComponent,
+    ContatosComponent,
 
   ],
   imports: [
