@@ -1,4 +1,4 @@
-<div class="mb-2">
+<div class="mb-2 mt-1">
   <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
     'alert-success': alertService.obterResultadoSucesso(),
     'alert-danger': !alertService.obterResultadoSucesso(),
@@ -51,21 +51,18 @@
       </div>
 
       <div class="col-md-12">
-        <button type="submit" class="btn button-success button-border button-login d-block mb-3">
+        <button type="submit" class="btn button-success button-border button-login d-block mb-3" title="Registrar">
           <i class="bi bi-floppy-fill"></i> Registrar
         </button>
-        <button type="submit" class="btn button-cancel button-border button-login d-block mb-3" (click)="limparCampos()">
+        <button type="submit" class="btn button-cancel button-border button-login d-block mb-3" (click)="limparCampos()" title="Cancelar">
           <i class="bi bi-x-circle-fill"></i> Cancelar
         </button>
-        <button type="button" class="btn button-info button-border button-login d-block" (click)="voltarParaTelaDeLogin()">
+        <button type="button" class="btn button-info button-border button-login d-block" (click)="voltarParaTelaDeLogin()" title="Voltar">
           <i class="bi bi-arrow-left"></i> Voltar para o Login
         </button>
       </div>
-
+      
     </form>
-
-    <!-- <div *ngIf="mensagem">{{ mensagem }}</div> -->
-
   </div>
 </div>
 

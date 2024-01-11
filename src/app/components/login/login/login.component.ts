@@ -28,11 +28,15 @@ export class LoginComponent implements OnInit {
     if (this.usuario.email && this.usuario.password) {
       this.authService.login(this.usuario)
         .then(() => {
-          this.router.navigate(['/home']);
+          this.alertService.mostrarAlerta(`Bem-vindo! Login bem-sucedido.`);
+
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 3000);
 
           setTimeout(() => {
             window.location.reload();
-          }, 100);
+          }, 3100);
         })
         .catch(error => {
           this.alertService.mostrarAlerta(`Erro ao logar! Verifique as suas credencias - ${error}`, false);

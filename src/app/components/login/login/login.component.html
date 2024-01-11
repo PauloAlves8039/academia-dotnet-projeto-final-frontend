@@ -1,4 +1,4 @@
-<div class="mb-2">
+<div class="mb-2 mt-1">
   <div *ngIf="alertService.obterMensagem() !== null" [ngClass]="{
     'alert-success': alertService.obterResultadoSucesso(),
     'alert-danger': !alertService.obterResultadoSucesso(),
@@ -39,13 +39,13 @@
       </div>
 
       <div class="col-md-12 mt-3">
-        <button type="submit" class="btn button-success button-border button-login d-block mb-3">
+        <button type="submit" class="btn button-success button-border button-login d-block mb-3" title="Entrar">
           <i class="bi bi-door-open-fill"></i> Entrar
         </button>
-        <button type="submit" class="btn button-cancel button-border button-login d-block mb-3" (click)="limparCampos()">
+        <button type="submit" class="btn button-cancel button-border button-login d-block mb-3" (click)="limparCampos()" title="Cancelar">
           <i class="bi bi-x-circle-fill"></i> Cancelar
         </button>
-        <button [routerLink]="['/create-usuario']" class="btn button-info button-border button-login d-block">
+        <button [routerLink]="['/create-usuario']" class="btn button-info button-border button-login d-block" title="Registrar Usuário">
           <i class="bi bi-person-fill-add"></i> Registrar Usuário
         </button>
       </div>
