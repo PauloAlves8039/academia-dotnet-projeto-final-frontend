@@ -30,7 +30,7 @@ Este repositório esta relacionando ao [Projeto Final Backend](https://github.co
 No backend desse projeto foi configurada na parte de segurança a permissão de exclusão de registros apenas para o usuário com perfil administrativo chamado `admin@localhost`, os demais usuário vão poder fazer das outras funcionalidades da aplicação.  
 
 ## :movie_camera: Vídeo de Demonstração
-- Apresentação [Projeto Estacionamento de Moto](https://www.youtube.com/watch?v=H34bsYdyjhU)
+- Apresentação [Projeto Estacionamento de Moto](https://www.youtube.com/watch?v=6eEUoA9NbTg)
 
 ## ✔️ Recursos Utilizados
 
@@ -43,17 +43,6 @@ No backend desse projeto foi configurada na parte de segurança a permissão de 
 - `jsPDF`
 - `API ViaCEP`
 - `Imagens Pexels`
-
-## :page_facing_up: Documentações Consultadas Durante o Desenvolvimento
-
-- [Angular CLI](https://angular.io/cli)
-- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
-- [API ViaCEP](https://viacep.com.br/)
-- [JWT](https://jwt.io/)
-- [Axios](https://axios-http.com/)
-- [jsPDF](https://artskydj.github.io/jsPDF/docs/jsPDF.html)
-- [Chart.js](https://www.chartjs.org/)
-- [Pexels](https://www.pexels.com/pt-br/)
   
 ## :white_check_mark: Decisões Técnicas
 
