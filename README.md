@@ -6,7 +6,7 @@
 
 ## :computer: Projeto
 
-Esse projeto faz a simulação de um sistema de gerenciamento para um estacionamento de motos, se trata do desafio final da Academia .NET ministrada pela `Universidade Franciscana - UFN`.
+Esse projeto tem como proposta fazer a simulação de um sistema de gerenciamento para um estacionamento de motos, se trata do desafio final da Academia .NET ministrada pela `Universidade Franciscana - UFN`.
 
 Este repositório esta relacionando ao [Projeto Final Backend](https://github.com/PauloAlves8039/academia-dotnet-projeto-final-backend)
 
@@ -73,6 +73,10 @@ No backend desse projeto foi configurada na parte de segurança a permissão de 
 
 - Para representar as models de meu projeto fiz a criação das classes `Cliente`, `Endereco`, `Veiculo`, `ClienteVeiculo` e `Permanencia`, a ideia foi criar uma classe um pouco mais genérica para representar o veículo já pensando em futuras melhorias, um tipo de cenário pensado foi, se o proprietário do estacionamento decidir trabalhar com carros, essa classe pode ser reaproveitada e adaptada para ser usada como referência em classes do tipo `Moto` e `Carro`.    
 
+7. A exibição de alertas sobre as `exclusões` de registros:
+
+- Decidi exibir alertas sobre as exclusões de registros como uma forma de orientar o usuário na hora de remover registros, a motivação para isso foi o fato de eu ter removido a exclusão de registros em `cascata` visando a `integridade dos dados`, `evitar exclusões acidentais` e `preservar o histórico dos registros`.
+
 ## :wrench: Utilização do Projeto
 
 - Certifique-se que a [WebAPI](https://github.com/PauloAlves8039/academia-dotnet-projeto-final-backend) esteja pronta e executada.
@@ -91,7 +95,7 @@ No backend desse projeto foi configurada na parte de segurança a permissão de 
 
 - Nos serviços tentei aplicar códigos os mais simples que pude fazer, em alguns serviços os códigos acabaram ficando um pouco robustos e podem ser pensados em futuras melhorias.
 
-- O uso de atertas personalizados, eu cheguei a adicionar uma biblioteca chamada `Sweetalert2` mas acabei removendo porque não consegui fazer uso da forma que eu gostaria, deixei alguns alertas com seu uso padrão, já outros alertas informativos consegui fazer uso dos alertas do `Bootstrap`, é outro ponto que pode ser melhorado.
+- O uso de alertas personalizados, eu cheguei a adicionar uma biblioteca chamada `Sweetalert2` mas acabei removendo porque não consegui fazer uso da forma que eu gostaria, deixei alguns alertas com seu uso padrão, já outros alertas informativos consegui fazer uso dos alertas do `Bootstrap`, é outro ponto que pode ser melhorado.
 
 - Os botões para `excluir` registros nos formulários, pretendo aplicar alguma validação para deixar esses botões indisponíveis para quase todos os usuários exceto o usuário `admin@localhost`, como informativo deixei uma mensagem em um alerta informando aos usuários comuns que eles não tem permissão para excluir registros.
 
