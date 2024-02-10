@@ -101,7 +101,13 @@ No backend desse projeto foi configurada na parte de segurança a permissão de 
 
 - Os elementos do `Bootstrap` que adicionei em meu projeto eles entregam os resultados esperados, para futuras melhorias nesse requisito a adição de novos elemento pode ser uma boa ideia.
 
-## Algumas Imagens de Meu Projeto
+## :floppy_disk: Clonar Repositório
+
+```bash
+git clone https://github.com/PauloAlves8039/academia-dotnet-projeto-final-frontend.git
+```
+
+## :camera: Screenshots
 
 ### Login
 
@@ -135,11 +141,6 @@ No backend desse projeto foi configurada na parte de segurança a permissão de 
 
 <p align="center"> <img src="https://github.com/PauloAlves8039/academia-dotnet-projeto-final-frontend/blob/master/src/assets/images/screenshot9.png" /></p>
 
-## :floppy_disk: Clonar Repositório
-
-```bash
-git clone https://github.com/PauloAlves8039/academia-dotnet-projeto-final-frontend.git
-```
 ## Conclusão
 
 Essa aplicação tem como objetivo oferecer melhorias para o uso de um sistema voltado para uma empresa fictícia que atua com o gerenciamento de um estacionamento de motos, a ideia surgiu por conta de uma necessidade que ocorre em localidades que tenham dificuldades para achar um estacionamento organizado, seguro e que ofereça um serviço com qualidade.
