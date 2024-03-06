@@ -30,8 +30,8 @@ Este repositório esta relacionando ao [Projeto Final Backend](https://github.co
 No backend desse projeto foi configurada na parte de segurança a permissão de exclusão de registros apenas para o usuário com perfil administrativo chamado `admin@localhost`, os demais usuário vão poder fazer das outras funcionalidades da aplicação.  
 
 ## :movie_camera: Vídeos de Demonstrações
-- Apresentação Durante o Desenvolvimento [Projeto Estacionamento de Moto](https://www.youtube.com/watch?v=H34bsYdyjhU&t=281s)
-- Apresentação Após o Desenvolvimento [Projeto Estacionamento de Moto](https://www.youtube.com/watch?v=6eEUoA9NbTg&t=489s)
+
+- Apresentação do Projeto [Estacionamento de Moto](https://www.youtube.com/watch?v=6eEUoA9NbTg&t=489s)
 
 ## ✔️ Recursos Utilizados
 
